@@ -530,12 +530,79 @@ function initLangDropdown() {
    });
 }
 
+
+
+/*==========================================================================
+Products slider
+============================================================================*/
+function initProductsCarousel() {
+   const sliders = document.querySelectorAll('.products');
+
+   if (!sliders.length) return;
+
+   sliders.forEach((carousel) => {
+      const sliderEl = carousel.querySelector('.products__slider');
+      const paginationEl = carousel.querySelector('.products__pagination');
+      const prevEl = carousel.querySelector('.products__prev');
+      const nextEl = carousel.querySelector('.products__next');
+
+      if (!sliderEl) return;
+
+      new Swiper(sliderEl, {
+         slidesPerView: 4,
+         loop: false,
+         pagination: {
+            el: paginationEl,
+            type: 'progressbar',
+            clickable: true,
+         },
+         speed: 600,
+         navigation: {
+            prevEl,
+            nextEl,
+         },
+         breakpoints: {
+            320: {
+               slidesPerView: 2,
+               spaceBetween: 4,
+            },
+            900: {
+               slidesPerView: 3,
+               spaceBetween: 6,
+            },
+            1200: {
+               slidesPerView: 4,
+               spaceBetween: 7,
+            }
+         },
+         on: {
+            progress(swiper, progress) {
+               const line = swiper.pagination.el;
+               if (!line || !line.offsetWidth) return;
+
+               const clamped = Math.min(Math.max(progress, 0), 1);
+
+               const bulletWidth = parseFloat(
+                  getComputedStyle(line).getPropertyValue('--bullet-width')
+               ) || 81;
+
+               const move = clamped * (line.offsetWidth - bulletWidth);
+
+               line.style.setProperty('--move', move + 'px');
+            }
+         }
+      });
+   });
+}
+
+
 /*==========================================================================
 Init
 ============================================================================*/
 document.addEventListener('DOMContentLoaded', () => {
    initSubmenu();
    initLangDropdown();
+   initProductsCarousel();
 })
 })();
 
