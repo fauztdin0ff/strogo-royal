@@ -597,12 +597,53 @@ function initProductsCarousel() {
 
 
 /*==========================================================================
+Footer submenu
+============================================================================*/
+function initFooterSubmenu() {
+   const items = document.querySelectorAll('.footer__menu-list-item.has-submenu');
+
+   if (!items.length) return;
+
+   items.forEach((item) => {
+      const button = item.querySelector('.footer__menu-button');
+      const submenu = item.querySelector('.footer__submenu');
+
+      if (!button || !submenu) return;
+
+      button.addEventListener('click', (e) => {
+         e.stopPropagation();
+
+         const isOpen = button.classList.contains('active');
+
+         items.forEach((el) => {
+            el.querySelector('.footer__menu-button')?.classList.remove('active');
+            el.querySelector('.footer__submenu')?.classList.remove('show');
+         });
+
+         if (!isOpen) {
+            button.classList.add('active');
+            submenu.classList.add('show');
+         }
+      });
+   });
+
+   document.addEventListener('click', () => {
+      items.forEach((item) => {
+         item.querySelector('.footer__menu-button')?.classList.remove('active');
+         item.querySelector('.footer__submenu')?.classList.remove('show');
+      });
+   });
+}
+
+
+/*==========================================================================
 Init
 ============================================================================*/
 document.addEventListener('DOMContentLoaded', () => {
    initSubmenu();
    initLangDropdown();
    initProductsCarousel();
+   initFooterSubmenu();
 })
 })();
 
