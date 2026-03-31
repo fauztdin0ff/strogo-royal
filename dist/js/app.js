@@ -323,30 +323,6 @@ function init() {
    }
 } */
 
-/*==========================================================================
-Swiper slider
-============================================================================*/
-/* const reviewsSlider = document.querySelector(".reviews__slider");
-
-if (reviewsSlider) {
-   const reviewsSwiper = new Swiper(reviewsSlider, {
-      slidesPerView: 1,
-      loop: true,
-      freeMode: false,
-      parallax: true,
-      speed: 800,
-      pagination: {
-         el: ".reviews__slider-pagination",
-         clickable: true,
-      },
-      navigation: {
-         nextEl: ".reviews__slide-next",
-         prevEl: ".reviews__slide-prev",
-      },
-   });
-}
- */
-
 
 /*==========================================================================
 Submenu
@@ -531,7 +507,6 @@ function initLangDropdown() {
 }
 
 
-
 /*==========================================================================
 Products slider
 ============================================================================*/
@@ -637,6 +612,424 @@ function initFooterSubmenu() {
 
 
 /*==========================================================================
+Gallery
+============================================================================*/
+const lightbox = GLightbox({
+   selector: '.glightbox'
+});
+
+
+/*==========================================================================
+Gallery slider
+============================================================================*/
+function initGallerySliders() {
+   const sliders = document.querySelectorAll('.gallery');
+
+   if (!sliders.length) return;
+
+   sliders.forEach((carousel) => {
+      const sliderEl = carousel.querySelector('.gallery__slider');
+      const paginationEl = carousel.querySelector('.gallery__pagination');
+      const prevEl = carousel.querySelector('.gallery__prev');
+      const nextEl = carousel.querySelector('.gallery__next');
+
+      if (!sliderEl) return;
+
+      new Swiper(sliderEl, {
+         slidesPerView: 4,
+         loop: false,
+         pagination: {
+            el: paginationEl,
+            type: 'progressbar',
+            clickable: true,
+         },
+         speed: 600,
+         navigation: {
+            prevEl,
+            nextEl,
+         },
+         breakpoints: {
+            320: {
+               slidesPerView: 1.18,
+               spaceBetween: 7,
+            },
+            550: {
+               slidesPerView: 1.6,
+               spaceBetween: 7,
+            },
+            900: {
+               slidesPerView: 3,
+               spaceBetween: 10,
+            }
+         },
+         on: {
+            progress(swiper, progress) {
+               const line = swiper.pagination.el;
+               if (!line || !line.offsetWidth) return;
+
+               const clamped = Math.min(Math.max(progress, 0), 1);
+
+               const bulletWidth = parseFloat(
+                  getComputedStyle(line).getPropertyValue('--bullet-width')
+               ) || 81;
+
+               const move = clamped * (line.offsetWidth - bulletWidth);
+
+               line.style.setProperty('--move', move + 'px');
+            }
+         }
+      });
+   });
+}
+
+
+/*==========================================================================
+Color labels
+============================================================================*/
+document.querySelectorAll('.filter-color').forEach(el => {
+   const color = el.dataset.color;
+   if (color) {
+      el.style.setProperty('--filter-color', color);
+   }
+});
+
+
+/*==========================================================================
+Filter
+============================================================================*/
+function initFilter() {
+   const filter = document.querySelector('.filter');
+   const toggle = document.querySelector('.filter__toggle');
+   const close = document.querySelector('.filter__close');
+   const body = document.body;
+
+   if (!filter || !toggle) return;
+
+   const open = () => {
+      filter.classList.add('show');
+      body.classList.add('filter-opened');
+   };
+
+   const hide = () => {
+      filter.classList.remove('show');
+      body.classList.remove('filter-opened');
+   };
+
+   const toggleFilter = () => {
+      const isOpen = filter.classList.contains('show');
+      isOpen ? hide() : open();
+   };
+
+   toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleFilter();
+   });
+
+   close?.addEventListener('click', hide);
+
+   document.addEventListener('click', (e) => {
+      if (!filter.contains(e.target) && !toggle.contains(e.target)) {
+         hide();
+      }
+   });
+}
+
+
+/*==========================================================================
+Filter functions
+============================================================================*/
+function initFilterUI() {
+   const groups = document.querySelectorAll('.filter__group');
+   const resetBtn = document.querySelector('.filter__reset');
+   const form = document.querySelector('.filter__form');
+
+   if (!groups.length) return;
+
+   groups.forEach((group) => {
+      const head = group.querySelector('.filter__group-head');
+      const content = group.querySelector('.filter__group-content');
+
+      head.addEventListener('click', () => {
+         const isActive = group.classList.contains('active');
+
+         if (isActive) {
+            group.classList.remove('active');
+            content.style.maxHeight = null;
+         } else {
+            group.classList.add('active');
+            content.style.maxHeight = content.scrollHeight + 'px';
+         }
+      });
+   });
+
+   function updateState() {
+      let hasSelected = false;
+
+      groups.forEach((group) => {
+         const inputs = group.querySelectorAll('input:checked');
+         const keys = group.querySelector('.filter__group-keys');
+
+         keys.innerHTML = '';
+
+         inputs.forEach((input) => {
+            hasSelected = true;
+
+            const label = input.closest('label');
+            const textEl = label.querySelector(
+               '.filter-radio__text, .filter-checkbox__text, .filter-color__text'
+            );
+
+            if (textEl) {
+               const span = document.createElement('span');
+               span.textContent = textEl.textContent;
+               keys.appendChild(span);
+            }
+         });
+      });
+
+      if (resetBtn) {
+         resetBtn.style.display = hasSelected ? 'flex' : 'none';
+      }
+   }
+
+   form.addEventListener('change', updateState);
+
+   form.addEventListener('reset', () => {
+      setTimeout(updateState, 0);
+   });
+
+   updateState();
+}
+
+
+/*==========================================================================
+Product gallery
+============================================================================*/
+
+const productGallerySlider = document.querySelector(".product__slider-thumb");
+const productGallerySlider2 = document.querySelector(".product__slider-big");
+
+if (productGallerySlider && productGallerySlider2) {
+   const productSwiper = new Swiper(productGallerySlider, {
+      direction: "vertical",
+      spaceBetween: 5,
+      slidesPerView: 8,
+      slidesPerGroup: 1,
+      watchSlidesProgress: true,
+   });
+
+   const productSwiper2 = new Swiper(productGallerySlider2, {
+      thumbs: {
+         swiper: productSwiper,
+      },
+      mousewheel: {
+         releaseOnEdges: true,
+         sensitivity: 2,
+      },
+      freeMode: {
+         enabled: true,
+         momentum: true,
+         momentumRatio: 1,
+         momentumBounce: false,
+      },
+      pagination: {
+         el: '.product__slider-pagination',
+         type: 'progressbar',
+         clickable: true,
+      },
+      breakpoints: {
+         320: {
+            direction: "horizontal",
+            freeMode: false,
+            slidesPerView: 'auto',
+            spaceBetween: 10,
+         },
+         1000: {
+            direction: "vertical",
+            slidesPerView: 'auto',
+            spaceBetween: 0,
+         }
+      },
+      on: {
+         progress(swiper, progress) {
+            const line = swiper.pagination.el;
+            if (!line || !line.offsetWidth) return;
+
+            const clamped = Math.min(Math.max(progress, 0), 1);
+
+            const bulletWidth = parseFloat(
+               getComputedStyle(line).getPropertyValue('--bullet-width')
+            ) || 81;
+
+            const move = clamped * (line.offsetWidth - bulletWidth);
+
+            line.style.setProperty('--move', move + 'px');
+         }
+      }
+   });
+}
+
+
+/*==========================================================================
+Product accordion
+============================================================================*/
+function initProductAccordion() {
+   const items = document.querySelectorAll('.product__about-group');
+   if (!items.length) return;
+
+   let activeItem = null;
+
+   items.forEach((item, index) => {
+      const head = item.querySelector('.product__about-head');
+      const body = item.querySelector('.product__about-body');
+
+      if (!head || !body) return;
+
+      // Открываем первый
+      if (index === 0) {
+         item.classList.add('active');
+
+         requestAnimationFrame(() => {
+            body.style.maxHeight = body.scrollHeight + 'px';
+         });
+
+         activeItem = item;
+      } else {
+         body.style.maxHeight = '';
+      }
+
+      head.addEventListener('click', () => {
+         // Закрыть текущий
+         if (activeItem === item) {
+            item.classList.remove('active');
+            body.style.maxHeight = '';
+            activeItem = null;
+            return;
+         }
+
+         // Закрыть предыдущий
+         if (activeItem) {
+            const prevBody = activeItem.querySelector('.product__about-body');
+            if (prevBody) prevBody.style.maxHeight = '';
+            activeItem.classList.remove('active');
+         }
+
+         // Открыть текущий
+         item.classList.add('active');
+
+         requestAnimationFrame(() => {
+            body.style.maxHeight = body.scrollHeight + 'px';
+         });
+
+         activeItem = item;
+      });
+   });
+}
+
+
+/*==========================================================================
+Product toggle text (read more)
+============================================================================*/
+function initProductReadMore() {
+   const buttons = document.querySelectorAll('.product__about-read');
+   if (!buttons.length) return;
+
+   buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+         const text = btn.closest('.product__about-text');
+         const wrapper = text?.querySelector('.product__about-text-wrapper');
+         const body = btn.closest('.product__about-body');
+
+         if (!wrapper || !body) return;
+
+         const isExpanded = wrapper.classList.contains('expanded');
+
+         if (isExpanded) {
+            // СВЕРНУТЬ
+            wrapper.style.maxHeight = '120px';
+            wrapper.classList.remove('expanded');
+            btn.textContent = 'Далее';
+
+            // Обновляем родителя (после схлопывания)
+            requestAnimationFrame(() => {
+               body.style.maxHeight = body.scrollHeight + 'px';
+            });
+
+         } else {
+            // РАЗВЕРНУТЬ
+            requestAnimationFrame(() => {
+               // 1. раскрываем текст
+               wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+
+               // 2. ждём обновления layout и обновляем аккордеон
+               requestAnimationFrame(() => {
+                  body.style.maxHeight = body.scrollHeight + 'px';
+               });
+            });
+
+            wrapper.classList.add('expanded');
+            btn.textContent = 'Скрыть';
+         }
+      });
+   });
+}
+
+function checkReadMoreVisibility() {
+   const blocks = document.querySelectorAll('.product__about-text');
+
+   blocks.forEach(block => {
+      const wrapper = block.querySelector('.product__about-text-wrapper');
+      const btn = block.querySelector('.product__about-read');
+
+      if (!wrapper || !btn) return;
+
+      requestAnimationFrame(() => {
+         if (wrapper.scrollHeight <= wrapper.clientHeight) {
+            btn.style.display = 'none';
+         } else {
+            btn.style.display = '';
+         }
+      });
+   });
+}
+
+/*==========================================================================
+Product card swipe   
+============================================================================*/
+function initProductSwipe() {
+   const cards = document.querySelectorAll('.product-card');
+
+   cards.forEach(card => {
+      let startX = 0;
+      let currentX = 0;
+      let isSwiping = false;
+
+      card.addEventListener('touchstart', (e) => {
+         startX = e.touches[0].clientX;
+         isSwiping = true;
+      });
+
+      card.addEventListener('touchmove', (e) => {
+         if (!isSwiping) return;
+         currentX = e.touches[0].clientX;
+      });
+
+      card.addEventListener('touchend', () => {
+         if (!isSwiping) return;
+
+         const diff = currentX - startX;
+
+         if (Math.abs(diff) > 30) {
+            card.classList.toggle('is-swiped');
+         }
+
+         isSwiping = false;
+      });
+   });
+}
+
+
+/*==========================================================================
 Init
 ============================================================================*/
 document.addEventListener('DOMContentLoaded', () => {
@@ -644,6 +1037,13 @@ document.addEventListener('DOMContentLoaded', () => {
    initLangDropdown();
    initProductsCarousel();
    initFooterSubmenu();
+   initGallerySliders();
+   initFilter();
+   initFilterUI();
+   initProductAccordion();
+   initProductSwipe();
+   initProductReadMore();
+   checkReadMoreVisibility();
 })
 })();
 
