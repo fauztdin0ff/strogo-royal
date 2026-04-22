@@ -306,34 +306,38 @@ function initHideHeaderOnScroll() {
 
    if (!header) return;
 
-   let lastScroll = 0;
-   let scrollTimeout;
+   let lastScroll = window.scrollY;
+   let scrollUpStart = window.scrollY;
+
+   const showDelta = 40;
+   const topOffset = 40;
 
    window.addEventListener('scroll', () => {
       const currentScroll = window.scrollY;
 
-      if (currentScroll <= 0) {
+      if (currentScroll <= topOffset) {
          header.classList.remove('header--hide');
-         lastScroll = 0;
+         lastScroll = currentScroll;
+         scrollUpStart = currentScroll;
          return;
       }
 
       if (currentScroll > lastScroll) {
          header.classList.add('header--hide');
+         scrollUpStart = currentScroll;
       }
-      else {
-         header.classList.remove('header--hide');
+
+      else if (currentScroll < lastScroll) {
+         const scrolledUp = scrollUpStart - currentScroll;
+
+         if (scrolledUp > showDelta) {
+            header.classList.remove('header--hide');
+         }
       }
 
       lastScroll = currentScroll;
-
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-         lastScroll = window.scrollY;
-      }, 50);
    });
 }
-
 
 /*==========================================================================
 Submenu
