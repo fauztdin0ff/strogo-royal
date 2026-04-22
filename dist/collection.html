@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+   <meta name="format-detection" content="telephone=no">
+   <!-- Favicon -->
+   <link rel="icon" type="image/png" sizes="16x16" href="img/fav/favicon-16x16.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="img/fav/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="192x192" href="img/fav/android-chrome-192x192.png">
+   <link rel="icon" type="image/png" sizes="512x512" href="img/fav/android-chrome-512x512.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="img/fav/apple-touch-icon.png">
+   <link rel="icon" type="image/x-icon" href="img/fav/favicon.ico">
+   <!--<meta name="msapplication-TileColor" content="#000000">
+   <meta name="theme-color" content="#000000">-->
+   <!-- Meta Description -->
+   <meta name="description" content="">
+   <meta property="og:title" content="">
+   <meta property="og:description" content="">
+   <meta property="og:url" content="">
+   <meta property="og:type" content="website">
+   <!-- Styles -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.css">
+   <link rel="stylesheet" href="css/style.min.css">
+   <title>Главная</title>
+</head>
+
+<body>
+   <div class="wrapper">
+      <header class="header">
+   <div class="header__wrapper">
+      <div class="header__body container">
+         <div class="header__buttons">
+            <div class="menu__icon"><span></span></div>
+         </div>
+         <a href="index.html" class="header__logo">
+            <img src="img/logo.png" width="185" height="82" alt="logo">
+         </a>
+
+         <div class="header__menu menu">
+            <nav class="menu__body">
+               <button type="button" class="menu__body-close">
+                  <svg>
+                     <use xlink:href="img/icons/icons.svg#icon-close"></use>
+                  </svg>
+                  Закрыть
+               </button>
+               <ul class="menu__list">
+                  <li class="menu__item">
+                     <button type="button" class="menu__label">Коллекции
+                        <svg>
+                           <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                        </svg>
+                     </button>
+                     <div class="submenu">
+                        <div class="submenu__back">
+                           <svg>
+                              <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
+                           </svg>
+                           Коллекции
+                        </div>
+                        <ul class="submenu__list">
+                           <li class="submenu__item">
+                              <button type="button" class="submenu__label">Вечерняя коллекция
+                                 <svg>
+                                    <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                                 </svg>
+                              </button>
+                              <ul class="submenu__sublist">
+                                 <li class="submenu__subitem">
+                                    <a href="collection.html" class="submenu__sublink">Artisan</a>
+                                 </li>
+                                 <li class="submenu__preview">
+                                    <a href="collection.html" class="submenu__preview-link">
+                                       <img src="img/categories/thumb-1.png" width="270" height="230"
+                                          alt="category image">
+                                       <span class="submenu__preview-text">Коллекция Artisan</span>
+                                    </a>
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class="submenu__item">
+                              <button type="button" class="submenu__label">Каталог
+                                 <svg>
+                                    <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                                 </svg>
+                              </button>
+                              <ul class="submenu__sublist">
+                                 <li class="submenu__subitem">
+                                    <a href="collections.html" class="submenu__sublink">Смотреть все</a>
+                                 </li>
+                                 <li class="submenu__subitem">
+                                    <a href="collections.html" class="submenu__sublink">Платья</a>
+                                 </li>
+                                 <li class="submenu__subitem">
+                                    <a href="collections.html" class="submenu__sublink">Юбки</a>
+                                 </li>
+                                 <li class="submenu__subitem">
+                                    <a href="collections.html" class="submenu__sublink">Жакеты</a>
+                                 </li>
+                                 <li class="submenu__subitem">
+                                    <a href="collections.html" class="submenu__sublink">Пальто</a>
+                                 </li>
+                                 <li class="submenu__subitem">
+                                    <a href="collections.html" class="submenu__sublink">Костюмы</a>
+                                 </li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="menu__item">
+                     <a href="collections.html" class="menu__link">Аксессуары</a>
+                  </li>
+                  <li class="menu__item">
+                     <button type="button" class="menu__label">LookBook
+                        <svg>
+                           <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                        </svg>
+                     </button>
+                     <div class="submenu">
+                        <div class="submenu__back">
+                           <svg>
+                              <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
+                           </svg>
+                           Lookbook
+                        </div>
+
+                        <ul class="submenu__list">
+                           <li class="submenu__item">
+                              <a href="lookbooks.html" class="submenu__sublink">Смотреть все</a>
+                           </li>
+                           <li class="submenu__item">
+                              <a href="lookbook.html" class="submenu__sublink">Artisan</a>
+                           </li>
+                           <li class="submenu__item">
+                              <a href="lookbook.html" class="submenu__sublink">Архивная коллекция</a>
+                           </li>
+                           <li class="submenu__preview">
+                              <a href="lookbook.html" class="submenu__preview-link">
+                                 <img src="img/categories/thumb-2.png" width="270" height="230" alt="category image">
+                                 <span class="submenu__preview-text">Lookbook Artisan 2026</span>
+                              </a>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="menu__item">
+                     <a href="tailoring.html" class="menu__link">Индивидуальный пошив</a>
+                  </li>
+                  <li class="menu__item">
+                     <a href="gift-sertificate.html" class="menu__link">Подарочный сертификат</a>
+                  </li>
+                  <li class="menu__item">
+                     <button type="button" class="menu__label">О бренде
+                        <svg>
+                           <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                        </svg>
+                     </button>
+                     <div class="submenu">
+                        <div class="submenu__back">
+                           <svg>
+                              <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
+                           </svg>
+                           О бренде
+                        </div>
+
+                        <ul class="submenu__list">
+                           <li class="submenu__item">
+                              <a href="lookbooks.html" class="submenu__sublink">Биография дизайнера</a>
+                           </li>
+                           <li class="submenu__item">
+                              <a href="lookbook.html" class="submenu__sublink">Сми о нас</a>
+                           </li>
+                           <li class="submenu__item">
+                              <a href="lookbook.html" class="submenu__sublink">Статьи</a>
+                           </li>
+                           <li class="submenu__item">
+                              <a href="lookbook.html" class="submenu__sublink">Музы бренда</a>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="menu__item">
+                     <a href="contacts.html" class="menu__link">Контакты</a>
+                  </li>
+
+               </ul>
+               <div class="socials">
+                  <a href="tel:+7" class="socials__link" aria-label="Позвонить">
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-phone"></use>
+                     </svg>
+                  </a>
+                  <a href="" class="socials__link" aria-label="Telegram">
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-telegram"></use>
+                     </svg>
+                  </a>
+                  <a href="" class="socials__link" aria-label="Whatsapp">
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-whatsapp"></use>
+                     </svg>
+                  </a>
+               </div>
+            </nav>
+         </div>
+
+         <div class="header__actions">
+            <div class="lang-mod">
+               <button type="button" class="lang-mod__btn">
+                  <svg>
+                     <use xlink:href="img/icons/icons.svg#icon-globe"></use>
+                  </svg>
+                  RU
+                  <span class="lang-mod__arrow">
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-down"></use>
+                     </svg>
+                  </span>
+               </button>
+               <ul class="lang-mod__menu">
+                  <li class="lang-mod__menu-item">
+                     <a href="" class="lang-mod__link">EN</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="header-bg"></div>
+   </div>
+</header>
+      <main>
+         <section class="hero --collection">
+            <div class="hero__body">
+               <div class="hero__image">
+                  <picture>
+                     <source media="(max-width:767px )" srcset="img/collect-hero-mob.png">
+                     <img src="img/collect-hero.png" alt="">
+                  </picture>
+               </div>
+               <div class="hero__text">
+                  <div class="container">
+                     <div class="hero__subtitle">ARTISAN</div>
+                     <div class="hero__link">
+                        <a href="lookbook.html" class="link-underline">Смотреть Lookbook</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+         <section class="collections">
+            <div class="collections__body container">
+               <div class="collections__head">
+                  <div class="collections__subtitle">Artisan (англ.) – мастер, ремесленник, рукодельница. При создании
+                     коллекции
+                     ARTISAN я прежде всего вдохновлялась уровнем мастерства своей команды. <br>
+                     Все эти люди – профессионалы высочайшего уровня. Каждый шов, каждая
+                     деталь, каждый фрагмент вышивки дышит совершенством.</div>
+               </div>
+               <div class="collections__filters">
+                  <div class="filter__toggle">
+                     <p>Фильтры <span>(0)</span></p>
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-filter"></use>
+                     </svg>
+                  </div>
+                  <div class="filter">
+                     <div class="filter__head">
+                        <div class="filter__title">Фильтры</div>
+                        <button type="reset" form="filter-form" class="filter__reset">
+                           Сбросить всё
+                           <svg>
+                              <use xlink:href="img/icons/icons.svg#icon-close"></use>
+                           </svg>
+                        </button>
+                     </div>
+                     <button type="button" class="filter__close" aria-label="Закрыть фильтры">
+                        <svg>
+                           <use xlink:href="img/icons/icons.svg#icon-close"></use>
+                        </svg>
+                     </button>
+                     <div class="filter__groups">
+                        <form class="filter__form" id="filter-form">
+                           <div class="filter__group">
+                              <div class="filter__group-head">
+                                 <div>
+                                    <div class="filter__group-name">Сортировка</div>
+                                    <div class="filter__group-keys"></div>
+                                 </div>
+                                 <div class="filter__group-arrow">
+                                    <svg>
+                                       <use xlink:href="img/icons/icons.svg#icon-chevron-down"></use>
+                                    </svg>
+                                 </div>
+                              </div>
+                              <div class="filter__group-content">
+                                 <div class="filter__items">
+                                    <label class="filter-radio">
+                                       <input type="radio" name="sort" value="">
+                                       <span class="filter-radio__box"></span>
+                                       <span class="filter-radio__text">По популярности</span>
+                                    </label>
+                                    <label class="filter-radio">
+                                       <input type="radio" name="sort" value="">
+                                       <span class="filter-radio__box"></span>
+                                       <span class="filter-radio__text">По новизне</span>
+                                    </label>
+                                    <label class="filter-radio">
+                                       <input type="radio" name="sort" value="">
+                                       <span class="filter-radio__box"></span>
+                                       <span class="filter-radio__text">Цена по убыванию</span>
+                                    </label>
+                                    <label class="filter-radio">
+                                       <input type="radio" name="sort" value="">
+                                       <span class="filter-radio__box"></span>
+                                       <span class="filter-radio__text">Цена по возрастанию</span>
+                                    </label>
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="filter__group">
+                              <div class="filter__group-head">
+                                 <div>
+                                    <div class="filter__group-name">Размер</div>
+                                    <div class="filter__group-keys"></div>
+                                 </div>
+                                 <div class="filter__group-arrow">
+                                    <svg>
+                                       <use xlink:href="img/icons/icons.svg#icon-chevron-down"></use>
+                                    </svg>
+                                 </div>
+                              </div>
+                              <div class="filter__group-content">
+                                 <div class="filter__items">
+                                    <label class="filter-checkbox">
+                                       <input type="checkbox" name="size" value="">
+                                       <span class="filter-checkbox__box"></span>
+                                       <span class="filter-checkbox__text">44</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                       <input type="checkbox" name="size" value="">
+                                       <span class="filter-checkbox__box"></span>
+                                       <span class="filter-checkbox__text">46</span>
+                                    </label>
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="filter__group">
+                              <div class="filter__group-head">
+                                 <div>
+                                    <div class="filter__group-name">Цвет</div>
+                                    <div class="filter__group-keys"></div>
+                                 </div>
+                                 <div class="filter__group-arrow">
+                                    <svg>
+                                       <use xlink:href="img/icons/icons.svg#icon-chevron-down"></use>
+                                    </svg>
+                                 </div>
+                              </div>
+                              <div class="filter__group-content">
+                                 <div class="filter__items">
+                                    <label class="filter-color" data-color="#FFFDF5" data-check-color="black">
+                                       <input type="checkbox" name="color" value="">
+                                       <span class="filter-color__box"></span>
+                                       <span class="filter-color__text">Молочный</span>
+                                    </label>
+                                    <label class="filter-color" data-color="#353535" data-check-color="white">
+                                       <input type="checkbox" name="color" value="">
+                                       <span class="filter-color__box"></span>
+                                       <span class="filter-color__text">Чёрный</span>
+                                    </label>
+                                    <label class="filter-color" data-color="#FF2D32" data-check-color="black">
+                                       <input type="checkbox" name="color" value="">
+                                       <span class="filter-color__box"></span>
+                                       <span class="filter-color__text">Красный</span>
+                                    </label>
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="filter__stock">
+                              <label class="filter-radio">
+                                 <input type="radio" name="stock" value="">
+                                 <span class="filter-radio__box"></span>
+                                 <span class="filter-radio__text">В наличии</span>
+                              </label>
+                              <label class="filter-radio">
+                                 <input type="radio" name="stock" value="">
+                                 <span class="filter-radio__box"></span>
+                                 <span class="filter-radio__text">Под заказ</span>
+                              </label>
+                           </div>
+                           <div class="filter__actions">
+                              <button type="submit" class="btn">Применить</button>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <div class="collections__products">
+                  <a href="product.html" class="product-card">
+                     <div class="product-card__image">
+                        <img src="img/products/prod-1-1.png" class="product-card__image-1" width="" height="" alt="">
+                        <img src="img/products/prod-1-2.png" class="product-card__image-2" width="" height="" alt="">
+                     </div>
+                     <div class="product-card__info">
+                        <div class="product-card__name">Платье миди из сатина и шелковой органзы</div>
+                        <div class="product-card__price">175 000 ₽</div>
+                     </div>
+                  </a>
+                  <a href="product.html" class="product-card">
+                     <div class="product-card__image">
+                        <img src="img/products/prod-2-1.png" class="product-card__image-1" width="" height="" alt="">
+                        <img src="img/products/prod-2-2.png" class="product-card__image-2" width="" height="" alt="">
+                     </div>
+                     <div class="product-card__info">
+                        <div class="product-card__name">Платье миди из сатина и шелковой органзы</div>
+                        <div class="product-card__price">175 000 ₽</div>
+                     </div>
+                  </a>
+                  <a href="product.html" class="product-card">
+                     <div class="product-card__image">
+                        <img src="img/products/prod-3-1.png" class="product-card__image-1" width="" height="" alt="">
+                        <img src="img/products/prod-3-2.png" class="product-card__image-2" width="" height="" alt="">
+                     </div>
+                     <div class="product-card__info">
+                        <div class="product-card__name">Платье миди из сатина и шелковой органзы</div>
+                        <div class="product-card__price">175 000 ₽</div>
+                     </div>
+                  </a>
+                  <a href="product.html" class="product-card">
+                     <div class="product-card__image">
+                        <img src="img/products/prod-1-1.png" class="product-card__image-1" width="" height="" alt="">
+                        <img src="img/products/prod-1-2.png" class="product-card__image-2" width="" height="" alt="">
+                     </div>
+                     <div class="product-card__info">
+                        <div class="product-card__name">Платье миди из сатина и шелковой органзы</div>
+                        <div class="product-card__price">175 000 ₽</div>
+                     </div>
+                  </a>
+                  <a href="product.html" class="product-card">
+                     <div class="product-card__image">
+                        <img src="img/products/prod-2-1.png" class="product-card__image-1" width="" height="" alt="">
+                        <img src="img/products/prod-2-2.png" class="product-card__image-2" width="" height="" alt="">
+                     </div>
+                     <div class="product-card__info">
+                        <div class="product-card__name">Платье миди из сатина и шелковой органзы</div>
+                        <div class="product-card__price">175 000 ₽</div>
+                     </div>
+                  </a>
+                  <a href="product.html" class="product-card">
+                     <div class="product-card__image">
+                        <img src="img/products/prod-3-1.png" class="product-card__image-1" width="" height="" alt="">
+                        <img src="img/products/prod-3-2.png" class="product-card__image-2" width="" height="" alt="">
+                     </div>
+                     <div class="product-card__info">
+                        <div class="product-card__name">Платье миди из сатина и шелковой органзы</div>
+                        <div class="product-card__price">175 000 ₽</div>
+                     </div>
+                  </a>
+                  <a href="product.html" class="product-card">
+                     <div class="product-card__image">
+                        <img src="img/products/prod-1-1.png" class="product-card__image-1" width="" height="" alt="">
+                        <img src="img/products/prod-1-2.png" class="product-card__image-2" width="" height="" alt="">
+                     </div>
+                     <div class="product-card__info">
+                        <div class="product-card__name">Платье миди из сатина и шелковой органзы</div>
+                        <div class="product-card__price">175 000 ₽</div>
+                     </div>
+                  </a>
+                  <a href="product.html" class="product-card">
+                     <div class="product-card__image">
+                        <img src="img/products/prod-2-1.png" class="product-card__image-1" width="" height="" alt="">
+                        <img src="img/products/prod-2-2.png" class="product-card__image-2" width="" height="" alt="">
+                     </div>
+                     <div class="product-card__info">
+                        <div class="product-card__name">Платье миди из сатина и шелковой органзы</div>
+                        <div class="product-card__price">175 000 ₽</div>
+                     </div>
+                  </a>
+               </div>
+            </div>
+         </section>
+      </main>
+      <footer class="footer">
+   <div class="footer__body container">
+      <div class="footer__main">
+         <a href="index.html" class="footer__logo">
+            <img src="img/logo.png" width="244" height="159" alt="logo">
+         </a>
+         <nav class="footer__menu">
+            <div class="footer__menu-col">
+               <div class="footer__menu-label">Клиентам</div>
+               <ul class="footer__menu-list">
+                  <li class="footer__menu-list-item">
+                     <a href="tailoring.html" class="footer__menu-link">Индивидуальный пошив</a>
+                  </li>
+                  <li class="footer__menu-list-item only-desktop">
+                     <a href="gift-sertificate.html" class="footer__menu-link">Подарочный сертификат</a>
+                  </li>
+                  <li class="footer__menu-list-item has-submenu">
+                     <button type="button" class="footer__menu-button">Правовая информация
+                        <svg>
+                           <use xlink:href="img/icons/icons.svg#icon-chevron-down"></use>
+                        </svg>
+                     </button>
+                     <div class="footer__submenu">
+                        <ul class="footer__submenu-list">
+                           <li><a href="files/privacy-policy.pdf">Политика конфиденциальности</a></li>
+                           <li><a href="files/data-processing-policy.pdf">Политика обработки персональных данных</a>
+                           </li>
+                           <li><a href="data-processing-consent.html">Согласие на обработку персональных данных</a></li>
+                           <li><a href="cookies-consent.html">Согласие на обработку файлов cookies</a></li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li class="footer__menu-list-item">
+                     <a href="" class="footer__menu-link">FAQ</a>
+                  </li>
+               </ul>
+            </div>
+            <div class="footer__menu-col">
+               <div class="footer__menu-label">О компании</div>
+               <ul class="footer__menu-list">
+                  <li class="footer__menu-list-item">
+                     <a href="" class="footer__menu-link">Контакты</a>
+                  </li>
+                  <li class="footer__menu-list-item">
+                     <a href="" class="footer__menu-link">История бренда</a>
+                  </li>
+                  <li class="footer__menu-list-item only-desktop">
+                     <a href="" class="footer__menu-link">Блог</a>
+                  </li>
+                  <li class="footer__menu-list-item only-desktop">
+                     <a href="" class="footer__menu-link">Telegram канал</a>
+                  </li>
+               </ul>
+            </div>
+         </nav>
+         <div class="footer__subscribe">
+            <div class="footer__subscribe-label">Присоединяйтесь к миру STROGÓ ROYALE</div>
+            <div class="footer__subscribe-content">
+               <form class="footer__subscribe-form">
+                  <div class="footer__subscribe-form-area">
+                     <input type="email" autocomplete="email" placeholder="E-mail" required>
+                  </div>
+                  <div class="footer__subscribe-form-area">
+                     <label class="agree-checkbox">
+                        <input type="checkbox" required="">
+                        <span class="agree-checkbox__box"></span>
+                        <span class="agree-checkbox__text">Я согласен на получение новостной/рекламной рассылки</span>
+                     </label>
+                  </div>
+                  <button type="submit" class="btn footer__subscribe-form-send">Подписаться</button>
+               </form>
+            </div>
+         </div>
+      </div>
+      <div class="footer__copyright">STROGÓ ROYALE by Anna-Roza Bistroff 2026</div>
+   </div>
+</footer>
+   </div>
+   
+   <div class="cookie" id="cookieBanner">
+      <div class="cookie__content">
+         <p class="cookie__text">
+            Strogo Royal использует cookie (файлы с данными о прошлых посещениях сайта) для персонализации сервисов и
+            удобства пользователей - ознакомьтесь с <a href="cookies-consent.html">Политикой обработки файлов
+               cookie</a>. <br> Вы можете запретить сохранение cookie в настройках своего браузера.
+         </p>
+         <div class="cookie__actions">
+            <button class="cookie__btn btn cookie__btn--accept" id="cookieAccept">Принять</button>
+         </div>
+      </div>
+   </div>
+   <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.js"></script>
+   <script src="js/app.js"></script>
+</body>
+
+</html>

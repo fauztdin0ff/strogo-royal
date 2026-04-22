@@ -297,31 +297,42 @@ _modules_functions_js__WEBPACK_IMPORTED_MODULE_0__.burgerMenu();
 _modules_functions_js__WEBPACK_IMPORTED_MODULE_0__.popups();
 _modules_functions_js__WEBPACK_IMPORTED_MODULE_0__.phoneMask();
 
+
 /*==========================================================================
-Observer Animation
+Fix header
 ============================================================================*/
-/* if (document.readyState === "complete") {
-   init();
-} else {
-   window.addEventListener("load", init);
+function initHideHeaderOnScroll() {
+   const header = document.querySelector('.header');
+
+   if (!header) return;
+
+   let lastScroll = 0;
+   let scrollTimeout;
+
+   window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll <= 0) {
+         header.classList.remove('header--hide');
+         lastScroll = 0;
+         return;
+      }
+
+      if (currentScroll > lastScroll) {
+         header.classList.add('header--hide');
+      }
+      else {
+         header.classList.remove('header--hide');
+      }
+
+      lastScroll = currentScroll;
+
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+         lastScroll = window.scrollY;
+      }, 50);
+   });
 }
-
-function init() {
-   function onEntry(entry) {
-      entry.forEach(change => {
-         if (change.isIntersecting) {
-            change.target.classList.add('element-show');
-         }
-      });
-   }
-
-   let options = { threshold: [0.4] };
-   let observer = new IntersectionObserver(onEntry, options);
-   let elements = document.querySelectorAll('.element-animation');
-   for (let elm of elements) {
-      observer.observe(elm);
-   }
-} */
 
 
 /*==========================================================================
@@ -330,6 +341,24 @@ Submenu
 function initSubmenu() {
    const isTouch = window.matchMedia('(hover: none)').matches;
    const items = document.querySelectorAll('.menu__item');
+   const headerBg = document.querySelector('.header-bg');
+
+   // ===== ПОДЛОЖКА =====
+   function toggleHeaderBg() {
+      if (!headerBg) return;
+
+      const activeSubmenu = document.querySelector('.submenu.show');
+
+      if (activeSubmenu) {
+         const height = activeSubmenu.scrollHeight;
+
+         headerBg.classList.add('show');
+         headerBg.style.height = height + 'px';
+      } else {
+         headerBg.classList.remove('show');
+         headerBg.style.height = '0px';
+      }
+   }
 
    items.forEach(item => {
       const label = item.querySelector('.menu__label');
@@ -340,16 +369,25 @@ function initSubmenu() {
 
       const baseTitle = label.textContent.trim();
 
-      // ===== DESKTOP (hover) =====
+      // ===== DESKTOP =====
       if (!isTouch) {
          item.addEventListener('mouseenter', () => {
+            document.querySelectorAll('.menu__item').forEach(el => {
+               el.querySelector('.menu__label')?.classList.remove('active');
+               el.querySelector('.submenu')?.classList.remove('show');
+            });
+
             label.classList.add('active');
             submenu.classList.add('show');
+
+            toggleHeaderBg();
          });
 
          item.addEventListener('mouseleave', () => {
             label.classList.remove('active');
             submenu.classList.remove('show');
+
+            toggleHeaderBg();
          });
       }
 
@@ -363,6 +401,7 @@ function initSubmenu() {
             document.querySelectorAll('.menu__item').forEach(el => {
                el.querySelector('.menu__label')?.classList.remove('active');
                el.querySelector('.submenu')?.classList.remove('show');
+
                el.querySelectorAll('.submenu__sublist').forEach(list => {
                   list.classList.remove('show');
                });
@@ -385,6 +424,8 @@ function initSubmenu() {
                label.classList.add('active');
                submenu.classList.add('show');
             }
+
+            toggleHeaderBg();
          });
 
          // ===== ВТОРОЙ УРОВЕНЬ =====
@@ -415,6 +456,8 @@ function initSubmenu() {
                      ${baseTitle} / ${subLabel.textContent.trim()}
                   `;
                }
+
+               toggleHeaderBg();
             });
          });
 
@@ -422,11 +465,14 @@ function initSubmenu() {
          if (backBtn) {
             backBtn.addEventListener('click', () => {
 
+               // назад со второго уровня
                if (backBtn.classList.contains('added')) {
                   submenu.querySelectorAll('.submenu__sublist').forEach(list => {
                      list.classList.remove('show');
                   });
+
                   backBtn.classList.remove('added');
+
                   backBtn.innerHTML = `
                      <svg>
                         <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
@@ -434,10 +480,15 @@ function initSubmenu() {
                      ${baseTitle}
                   `;
 
+                  toggleHeaderBg();
                   return;
                }
+
+               // закрыть submenu
                submenu.classList.remove('show');
                label.classList.remove('active');
+
+               toggleHeaderBg();
             });
          }
       }
@@ -462,6 +513,7 @@ function initSubmenu() {
 
             if (back && lbl) {
                back.classList.remove('added');
+
                back.innerHTML = `
                   <svg>
                      <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
@@ -470,10 +522,11 @@ function initSubmenu() {
                `;
             }
          });
+
+         toggleHeaderBg();
       }
    });
 }
-
 
 /*==========================================================================
 Lang module
@@ -610,14 +663,16 @@ function initFooterSubmenu() {
    });
 }
 
-
 /*==========================================================================
 Gallery
 ============================================================================*/
-const lightbox = GLightbox({
-   selector: '.glightbox'
-});
-
+if (typeof GLightbox !== 'undefined') {
+   const lightbox = GLightbox({
+      selector: '.glightbox'
+   });
+} else {
+   console.warn('GLightbox не загружен');
+}
 
 /*==========================================================================
 Gallery slider
@@ -805,68 +860,76 @@ function initFilterUI() {
 /*==========================================================================
 Product gallery
 ============================================================================*/
+function initProductGalleryMobile() {
+   const slider = document.querySelector('.product__gallery-slider');
+   const wrapper = document.querySelector('.product__gallery-slider-wrapper');
+   const slides = document.querySelectorAll('.product__gallery-slide');
 
-const productGallerySlider = document.querySelector(".product__slider-thumb");
-const productGallerySlider2 = document.querySelector(".product__slider-big");
+   if (!slider || !wrapper || !slides.length || typeof Swiper === 'undefined') return;
 
-if (productGallerySlider && productGallerySlider2) {
-   const productSwiper = new Swiper(productGallerySlider, {
-      direction: "vertical",
-      spaceBetween: 5,
-      slidesPerView: 8,
-      slidesPerGroup: 1,
-      watchSlidesProgress: true,
-   });
+   let swiper = null;
 
-   const productSwiper2 = new Swiper(productGallerySlider2, {
-      thumbs: {
-         swiper: productSwiper,
-      },
-      mousewheel: {
-         releaseOnEdges: true,
-         sensitivity: 2,
-      },
-      freeMode: {
-         enabled: true,
-         momentum: true,
-         momentumRatio: 1,
-         momentumBounce: false,
-      },
-      pagination: {
-         el: '.product__slider-pagination',
-         type: 'progressbar',
-         clickable: true,
-      },
-      breakpoints: {
-         320: {
-            direction: "horizontal",
-            freeMode: false,
-            slidesPerView: 'auto',
-            spaceBetween: 10,
+   function enableSwiper() {
+      if (swiper) return;
+
+      slider.classList.add('swiper');
+      wrapper.classList.add('swiper-wrapper');
+
+      slides.forEach((slide) => {
+         slide.classList.add('swiper-slide');
+      });
+
+      swiper = new Swiper(slider, {
+         slidesPerView: 1,
+         spaceBetween: 0,
+         pagination: {
+            el: '.product__slider-pagination',
+            type: 'progressbar',
+            clickable: true,
          },
-         1000: {
-            direction: "vertical",
-            slidesPerView: 'auto',
-            spaceBetween: 0,
+         on: {
+            progress(swiper, progress) {
+               const line = swiper.pagination.el;
+               if (!line || !line.offsetWidth) return;
+
+               const clamped = Math.min(Math.max(progress, 0), 1);
+
+               const bulletWidth = parseFloat(
+                  getComputedStyle(line).getPropertyValue('--bullet-width')
+               ) || 81;
+
+               const move = clamped * (line.offsetWidth - bulletWidth);
+
+               line.style.setProperty('--move', move + 'px');
+            }
          }
-      },
-      on: {
-         progress(swiper, progress) {
-            const line = swiper.pagination.el;
-            if (!line || !line.offsetWidth) return;
+      });
+   }
 
-            const clamped = Math.min(Math.max(progress, 0), 1);
+   function disableSwiper() {
+      if (!swiper) return;
 
-            const bulletWidth = parseFloat(
-               getComputedStyle(line).getPropertyValue('--bullet-width')
-            ) || 81;
+      swiper.destroy(true, true);
+      swiper = null;
 
-            const move = clamped * (line.offsetWidth - bulletWidth);
+      slider.classList.remove('swiper');
+      wrapper.classList.remove('swiper-wrapper');
 
-            line.style.setProperty('--move', move + 'px');
-         }
+      slides.forEach((slide) => {
+         slide.classList.remove('swiper-slide');
+      });
+   }
+
+   function checkScreen() {
+      if (window.innerWidth <= 1000) {
+         enableSwiper();
+      } else {
+         disableSwiper();
       }
-   });
+   }
+
+   checkScreen();
+   window.addEventListener('resize', checkScreen);
 }
 
 
@@ -885,7 +948,6 @@ function initProductAccordion() {
 
       if (!head || !body) return;
 
-      // Открываем первый
       if (index === 0) {
          item.classList.add('active');
 
@@ -899,7 +961,6 @@ function initProductAccordion() {
       }
 
       head.addEventListener('click', () => {
-         // Закрыть текущий
          if (activeItem === item) {
             item.classList.remove('active');
             body.style.maxHeight = '';
@@ -907,14 +968,12 @@ function initProductAccordion() {
             return;
          }
 
-         // Закрыть предыдущий
          if (activeItem) {
             const prevBody = activeItem.querySelector('.product__about-body');
             if (prevBody) prevBody.style.maxHeight = '';
             activeItem.classList.remove('active');
          }
 
-         // Открыть текущий
          item.classList.add('active');
 
          requestAnimationFrame(() => {
@@ -945,23 +1004,17 @@ function initProductReadMore() {
          const isExpanded = wrapper.classList.contains('expanded');
 
          if (isExpanded) {
-            // СВЕРНУТЬ
             wrapper.style.maxHeight = '120px';
             wrapper.classList.remove('expanded');
             btn.textContent = 'Далее';
 
-            // Обновляем родителя (после схлопывания)
             requestAnimationFrame(() => {
                body.style.maxHeight = body.scrollHeight + 'px';
             });
 
          } else {
-            // РАЗВЕРНУТЬ
             requestAnimationFrame(() => {
-               // 1. раскрываем текст
                wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
-
-               // 2. ждём обновления layout и обновляем аккордеон
                requestAnimationFrame(() => {
                   body.style.maxHeight = body.scrollHeight + 'px';
                });
@@ -1000,6 +1053,8 @@ function initProductSwipe() {
    const cards = document.querySelectorAll('.product-card');
 
    cards.forEach(card => {
+      if (card.classList.contains('swiper-slide')) return;
+
       let startX = 0;
       let currentX = 0;
       let isSwiping = false;
@@ -1029,6 +1084,417 @@ function initProductSwipe() {
 }
 
 
+
+/*==========================================================================
+Calendar
+============================================================================*/
+const deliveryInputs = document.querySelectorAll('.calendar-mask');
+
+deliveryInputs.forEach(input => {
+   input.addEventListener('keydown', e => e.preventDefault());
+
+   if (typeof AirDatepicker !== 'undefined') {
+      new AirDatepicker(input, {
+         timepicker: true,
+         dateFormat: 'dd.MM.yyyy',
+         timeFormat: 'HH:mm',
+         autoClose: true,
+         minDate: new Date()
+      });
+   }
+});
+
+
+
+/*==========================================================================
+Sliders in About page
+============================================================================*/
+function initAboutSliders() {
+   const sliders = document.querySelectorAll('.about__gallery');
+
+   if (!sliders.length) return;
+
+   sliders.forEach((carousel) => {
+      const sliderEl = carousel.querySelector('.about__slider');
+      const paginationEl = carousel.querySelector('.about__slider-pagination');
+      const prevEl = carousel.querySelector('.about__slider-prev');
+      const nextEl = carousel.querySelector('.about__slider-next');
+
+      if (!sliderEl) return;
+
+      new Swiper(sliderEl, {
+         slidesPerView: 2,
+         loop: false,
+         pagination: {
+            el: paginationEl,
+            type: 'progressbar',
+            clickable: true,
+         },
+         speed: 600,
+         navigation: {
+            prevEl,
+            nextEl,
+         },
+         breakpoints: {
+            320: {
+               slidesPerView: 1.2,
+               spaceBetween: 4,
+            },
+            900: {
+               slidesPerView: 3,
+               spaceBetween: 6,
+            },
+            1200: {
+               slidesPerView: 2,
+               spaceBetween: 7,
+            }
+         },
+         on: {
+            progress(swiper, progress) {
+               const line = swiper.pagination.el;
+               if (!line || !line.offsetWidth) return;
+
+               const clamped = Math.min(Math.max(progress, 0), 1);
+
+               const bulletWidth = parseFloat(
+                  getComputedStyle(line).getPropertyValue('--bullet-width')
+               ) || 81;
+
+               const move = clamped * (line.offsetWidth - bulletWidth);
+
+               line.style.setProperty('--move', move + 'px');
+            }
+         }
+      });
+   });
+}
+
+
+
+/*==========================================================================
+Blog marque
+============================================================================*/
+const marqueSlider = document.querySelector(".blog__slider");
+
+if (marqueSlider) {
+   const brandsSwiper = new Swiper(marqueSlider, {
+      slidesPerView: 6,
+      spaceBetween: 60,
+      loop: true,
+      speed: 3000,
+      freeMode: true,
+      freeModeMomentum: false,
+      allowTouchMove: false,
+      autoplay: {
+         delay: 0,
+         disableOnInteraction: false,
+      },
+      breakpoints: {
+         320: {
+            slidesPerView: 2.6,
+         },
+         600: {
+            slidesPerView: 3,
+         },
+         900: {
+            slidesPerView: 4,
+         },
+         1200: {
+            slidesPerView: 5,
+         },
+         2000: {
+            slidesPerView: 6,
+         }
+      }
+   });
+}
+
+
+/*==========================================================================
+Readmore slider
+============================================================================*/
+function moreSlider() {
+   const sliderEl = document.querySelector('.readmore__slider');
+   if (!sliderEl) return;
+
+   if (sliderEl.swiper) return;
+
+   new Swiper(sliderEl, {
+      slidesPerView: 3,
+      loop: false,
+      navigation: {
+         prevEl: '.readmore__prev',
+         nextEl: '.readmore__next',
+      },
+      breakpoints: {
+         320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+         },
+         768: {
+            slidesPerView: 2,
+            spaceBetween: 16,
+         },
+         1200: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+         },
+         2000: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+         }
+      }
+   });
+}
+
+
+
+/*==========================================================================
+faq
+============================================================================*/
+function initFaqAccordion() {
+   const faqItems = document.querySelectorAll('.faq__accordion-item');
+   if (!faqItems.length) return;
+
+   faqItems.forEach(item => {
+      const question = item.querySelector('.faq__accordion-head');
+      const answer = item.querySelector('.faq__accordion-content');
+
+      if (!question || !answer || item.dataset.inited) return;
+
+      question.addEventListener('click', () => {
+         const isActive = item.classList.contains('active');
+
+         faqItems.forEach(el => {
+            const elAnswer = el.querySelector('.faq__accordion-content');
+            if (!elAnswer) return;
+
+            el.classList.remove('active');
+            elAnswer.style.maxHeight = null;
+         });
+
+         if (!isActive) {
+            item.classList.add('active');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+         }
+      });
+
+      item.dataset.inited = 'true';
+   });
+}
+
+
+/*==========================================================================
+Gift slider
+============================================================================*/
+function initGiftSlider() {
+   const carousel = document.querySelector('.sertificate__gallery');
+   if (!carousel) return;
+
+   const sliderEl = carousel.querySelector('.sertificate__slider');
+   const paginationEl = carousel.querySelector('.sertificate__pagination');
+
+   if (!sliderEl) return;
+
+   let swiper = null;
+   const mediaQuery = window.matchMedia('(max-width: 1200px)');
+
+   function initSwiper() {
+      swiper = new Swiper(sliderEl, {
+         slidesPerView: 1.2,
+         loop: false,
+         spaceBetween: 7,
+         pagination: {
+            el: paginationEl,
+            type: 'progressbar',
+            clickable: true,
+         },
+         speed: 600,
+         on: {
+            progress(swiper, progress) {
+               const line = swiper.pagination.el;
+               if (!line || !line.offsetWidth) return;
+
+               const clamped = Math.min(Math.max(progress, 0), 1);
+
+               const bulletWidth = parseFloat(
+                  getComputedStyle(line).getPropertyValue('--bullet-width')
+               ) || 81;
+
+               const move = clamped * (line.offsetWidth - bulletWidth);
+
+               line.style.setProperty('--move', move + 'px');
+            }
+         }
+      });
+   }
+
+   function destroySwiper() {
+      if (swiper) {
+         swiper.destroy(true, true);
+         swiper = null;
+      }
+   }
+
+   function checkBreakpoint(e) {
+      if (e.matches) {
+         if (!swiper) initSwiper();
+      } else {
+         destroySwiper();
+      }
+   }
+
+   checkBreakpoint(mediaQuery);
+   mediaQuery.addEventListener('change', checkBreakpoint);
+}
+
+
+/*==========================================================================
+Contacts slider
+============================================================================*/
+function contactsSlider() {
+   const sliderEl = document.querySelector('.contacts__slider');
+   if (!sliderEl) return;
+
+   if (sliderEl.swiper) return;
+
+   new Swiper(sliderEl, {
+      slidesPerView: 4,
+      spaceBetween: 7,
+      speed: 600,
+      loop: false,
+      navigation: {
+         prevEl: '.contacts__slider-prev',
+         nextEl: '.contacts__slider-next',
+      },
+      breakpoints: {
+         320: {
+            slidesPerView: 1.2,
+         },
+         768: {
+            slidesPerView: 3,
+         },
+         1200: {
+            slidesPerView: 4,
+         }
+      },
+      pagination: {
+         el: '.contacts__slider-pagination',
+         type: 'progressbar',
+         clickable: true,
+      },
+      on: {
+         progress(swiper, progress) {
+            const line = swiper.pagination.el;
+            if (!line || !line.offsetWidth) return;
+
+            const clamped = Math.min(Math.max(progress, 0), 1);
+
+            const bulletWidth = parseFloat(
+               getComputedStyle(line).getPropertyValue('--bullet-width')
+            ) || 81;
+
+            const move = clamped * (line.offsetWidth - bulletWidth);
+
+            line.style.setProperty('--move', move + 'px');
+         }
+      }
+   });
+}
+
+
+/*==========================================================================
+Map
+============================================================================*/
+if (typeof ymaps !== 'undefined') {
+   ymaps.ready(initMap);
+} else {
+   console.warn('Yandex Maps API не загружен');
+}
+
+function initMap() {
+   const mapEl = document.getElementById('map');
+   if (!mapEl) return;
+
+   const lat = parseFloat(mapEl.dataset.lat);
+   const lng = parseFloat(mapEl.dataset.lng);
+
+   // Проверка координат
+   if (isNaN(lat) || isNaN(lng)) {
+      console.warn('Некорректные координаты в data-атрибутах');
+      return;
+   }
+
+   const hint = mapEl.dataset.hint || '';
+   const balloon = mapEl.dataset.balloon || '';
+
+   const mapCenter = [lat, lng];
+
+   const myMap = new ymaps.Map('map', {
+      center: mapCenter,
+      zoom: 12,
+   }, {
+      searchControlProvider: 'yandex#search'
+   });
+
+   const iconImageSize = window.innerWidth < 768 ? [53, 70] : [103, 137];
+   const iconImageOffset = window.innerWidth < 768 ? [-25, -50] : [-50, -120];
+
+   const myPlacemark = new ymaps.Placemark(mapCenter, {
+      hintContent: hint,
+      balloonContent: balloon
+   }, {
+      iconLayout: 'default#image',
+      iconImageHref: 'img/map-location.png',
+      iconImageSize: iconImageSize,
+      iconImageOffset: iconImageOffset
+   });
+
+   myMap.behaviors.disable('scrollZoom');
+
+   myMap.controls.remove('searchControl');
+   myMap.controls.remove('fullscreenControl');
+   myMap.controls.remove('rulerControl');
+
+   myMap.geoObjects.add(myPlacemark);
+
+   window.addEventListener('resize', function () {
+      const newIconImageSize = window.innerWidth < 768 ? [80, 107] : [170, 200];
+      const newIconImageOffset = window.innerWidth < 768 ? [-42.5, -105] : [-85, -200];
+
+      myPlacemark.options.set({
+         iconImageSize: newIconImageSize,
+         iconImageOffset: newIconImageOffset,
+      });
+   });
+}
+
+
+/*==========================================================================
+Cookies
+============================================================================*/
+(function () {
+   const banner = document.getElementById('cookieBanner');
+   const acceptBtn = document.getElementById('cookieAccept');
+   const STORAGE_KEY = 'cookie_consent';
+
+   if (localStorage.getItem(STORAGE_KEY)) return;
+
+   setTimeout(() => {
+      banner.classList.add('show');
+   }, 500);
+
+   function hideBanner() {
+      banner.classList.remove('show');
+   }
+
+   acceptBtn.addEventListener('click', () => {
+      localStorage.setItem(STORAGE_KEY, 'accepted');
+      hideBanner();
+   });
+
+})();
+
 /*==========================================================================
 Init
 ============================================================================*/
@@ -1044,7 +1510,44 @@ document.addEventListener('DOMContentLoaded', () => {
    initProductSwipe();
    initProductReadMore();
    checkReadMoreVisibility();
+   initAboutSliders();
+   moreSlider();
+   initFaqAccordion();
+   initGiftSlider();
+   contactsSlider();
+   initHideHeaderOnScroll();
+   initProductGalleryMobile();
+
 })
+
+
+
+
+
+/*==========================================================================
+TEST REQUEST SEND
+============================================================================*/
+function initRequestForm() {
+   const form = document.querySelector('.request__form');
+   const body = document.querySelector('.request__body');
+   const success = document.querySelector('.request__success');
+
+   if (!form || !body || !success) return;
+
+   form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+         form.reportValidity();
+         return;
+      }
+
+      body.classList.add('is-hidden');
+      success.classList.add('is-visible');
+   });
+}
+
+initRequestForm();
 })();
 
 /******/ })()
