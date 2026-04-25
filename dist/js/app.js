@@ -655,6 +655,19 @@ function initFooterSubmenu() {
          if (!isOpen) {
             button.classList.add('active');
             submenu.classList.add('show');
+
+            // ждем отрисовку
+            setTimeout(() => {
+               const rect = submenu.getBoundingClientRect();
+               const overflowBottom = rect.bottom - window.innerHeight;
+
+               if (overflowBottom > 0) {
+                  window.scrollBy({
+                     top: overflowBottom + 100,
+                     behavior: 'smooth'
+                  });
+               }
+            }, 200);
          }
       });
    });
@@ -1126,33 +1139,38 @@ function initAboutSliders() {
 
       if (!sliderEl) return;
 
+      const isArticleGallery = carousel.classList.contains('artilce-gallery');
+
       new Swiper(sliderEl, {
-         slidesPerView: 2,
          loop: false,
+         speed: 600,
+
+         slidesPerView: isArticleGallery ? 2 : 1.2,
+         spaceBetween: 4,
+
          pagination: {
             el: paginationEl,
             type: 'progressbar',
             clickable: true,
          },
-         speed: 600,
+
          navigation: {
             prevEl,
             nextEl,
          },
+
          breakpoints: {
-            320: {
-               slidesPerView: 1.2,
-               spaceBetween: 4,
-            },
             900: {
-               slidesPerView: 3,
+               slidesPerView: isArticleGallery ? 2 : 3,
                spaceBetween: 6,
             },
+
             1200: {
-               slidesPerView: 2,
+               slidesPerView: isArticleGallery ? 2 : 3,
                spaceBetween: 7,
             }
          },
+
          on: {
             progress(swiper, progress) {
                const line = swiper.pagination.el;
@@ -1160,9 +1178,8 @@ function initAboutSliders() {
 
                const clamped = Math.min(Math.max(progress, 0), 1);
 
-               const bulletWidth = parseFloat(
-                  getComputedStyle(line).getPropertyValue('--bullet-width')
-               ) || 81;
+               const bulletWidth =
+                  parseFloat(getComputedStyle(line).getPropertyValue('--bullet-width')) || 81;
 
                const move = clamped * (line.offsetWidth - bulletWidth);
 
@@ -1475,6 +1492,104 @@ function initMap() {
 
 
 /*==========================================================================
+Archive sliders
+============================================================================*/
+function initArchiveSlider() {
+   const collections = document.querySelectorAll('.archival__collection');
+
+   if (!collections.length || typeof Swiper === 'undefined') return;
+
+   const swipers = [];
+
+   function enableSwiper() {
+      collections.forEach((collection, index) => {
+         if (swipers[index]) return;
+
+         const slider = collection.querySelector('.archival__collection-slider');
+         const wrapper = collection.querySelector('.archival__collection-wrapper');
+         const slides = collection.querySelectorAll('.archival__collection-slide');
+         const pagination = collection.querySelector('.archival__collection-pagination');
+
+         if (!slider || !wrapper || !slides.length || !pagination) return;
+
+         slider.classList.add('swiper');
+         wrapper.classList.add('swiper-wrapper');
+
+         slides.forEach((slide) => {
+            slide.classList.add('swiper-slide');
+         });
+
+         swipers[index] = new Swiper(slider, {
+            slidesPerView: 1,
+            spaceBetween: 7,
+            pagination: {
+               el: pagination,
+               type: 'progressbar',
+               clickable: true,
+            },
+            breakpoints: {
+               320: {
+                  slidesPerView: 1.1,
+               },
+               550: {
+                  slidesPerView: 2.2,
+               },
+            },
+            on: {
+               progress(swiper, progress) {
+                  const line = swiper.pagination.el;
+                  if (!line || !line.offsetWidth) return;
+
+                  const clamped = Math.min(Math.max(progress, 0), 1);
+
+                  const bulletWidth =
+                     parseFloat(
+                        getComputedStyle(line).getPropertyValue('--bullet-width')
+                     ) || 81;
+
+                  const move = clamped * (line.offsetWidth - bulletWidth);
+
+                  line.style.setProperty('--move', move + 'px');
+               }
+            }
+         });
+      });
+   }
+
+   function disableSwiper() {
+      collections.forEach((collection, index) => {
+         if (!swipers[index]) return;
+
+         swipers[index].destroy(true, true);
+         swipers[index] = null;
+
+         const slider = collection.querySelector('.archival__collection-slider');
+         const wrapper = collection.querySelector('.archival__collection-wrapper');
+         const slides = collection.querySelectorAll('.archival__collection-slide');
+
+         slider.classList.remove('swiper');
+         wrapper.classList.remove('swiper-wrapper');
+
+         slides.forEach((slide) => {
+            slide.classList.remove('swiper-slide');
+         });
+      });
+   }
+
+   function checkScreen() {
+      if (window.innerWidth < 1000) {
+         enableSwiper();
+      } else {
+         disableSwiper();
+      }
+   }
+
+   checkScreen();
+   window.addEventListener('resize', checkScreen);
+}
+
+
+/*==========================================================================
 Cookies
 ============================================================================*/
 (function () {
@@ -1521,7 +1636,7 @@ document.addEventListener('DOMContentLoaded', () => {
    contactsSlider();
    initHideHeaderOnScroll();
    initProductGalleryMobile();
-
+   initArchiveSlider();
 })
 
 
