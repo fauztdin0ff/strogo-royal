@@ -1672,11 +1672,15 @@ Hero
   background: #fff;
 }
 
-.hero.--lookbook .hero__video,
-.hero.--lookbook .hero__image,
-.hero.--tailoring .hero__video,
-.hero.--tailoring .hero__image {
-  aspect-ratio: 4/5;
+@media (width < 767px) {
+  .hero.--lookbook .hero__video,
+  .hero.--lookbook .hero__image,
+  .hero.--tailoring .hero__video,
+  .hero.--tailoring .hero__image,
+  .hero.--collection .hero__video,
+  .hero.--collection .hero__image {
+    aspect-ratio: 4/5;
+  }
 }
 
 .hero.--lookbook .hero__text {
