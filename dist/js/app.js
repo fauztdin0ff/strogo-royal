@@ -1145,8 +1145,8 @@ function initAboutSliders() {
          loop: false,
          speed: 600,
 
-         slidesPerView: isArticleGallery ? 2 : 1.2,
-         spaceBetween: 4,
+         slidesPerView: isArticleGallery ? 1.18 : 1.18,
+         spaceBetween: 7,
 
          pagination: {
             el: paginationEl,
@@ -1162,7 +1162,7 @@ function initAboutSliders() {
          breakpoints: {
             900: {
                slidesPerView: isArticleGallery ? 2 : 3,
-               spaceBetween: 6,
+               spaceBetween: 7,
             },
 
             1200: {
@@ -1322,7 +1322,7 @@ function initGiftSlider() {
 
    function initSwiper() {
       swiper = new Swiper(sliderEl, {
-         slidesPerView: 1.2,
+         slidesPerView: 1.18,
          loop: false,
          spaceBetween: 7,
          pagination: {
@@ -1390,7 +1390,7 @@ function contactsSlider() {
       },
       breakpoints: {
          320: {
-            slidesPerView: 1.2,
+            slidesPerView: 1.18,
          },
          768: {
             slidesPerView: 3,
@@ -1429,8 +1429,6 @@ Map
 ============================================================================*/
 if (typeof ymaps !== 'undefined') {
    ymaps.ready(initMap);
-} else {
-   console.warn('Yandex Maps API не загружен');
 }
 
 function initMap() {
@@ -1440,53 +1438,51 @@ function initMap() {
    const lat = parseFloat(mapEl.dataset.lat);
    const lng = parseFloat(mapEl.dataset.lng);
 
-   // Проверка координат
-   if (isNaN(lat) || isNaN(lng)) {
-      console.warn('Некорректные координаты в data-атрибутах');
-      return;
-   }
+   if (isNaN(lat) || isNaN(lng)) return;
 
-   const hint = mapEl.dataset.hint || '';
-   const balloon = mapEl.dataset.balloon || '';
-
-   const mapCenter = [lat, lng];
+   const center = [lat, lng];
 
    const myMap = new ymaps.Map('map', {
-      center: mapCenter,
-      zoom: 12,
-   }, {
-      searchControlProvider: 'yandex#search'
+      center,
+      zoom: 12
    });
 
-   const iconImageSize = window.innerWidth < 768 ? [53, 70] : [103, 137];
-   const iconImageOffset = window.innerWidth < 768 ? [-25, -50] : [-50, -120];
+   let myPlacemark;
 
-   const myPlacemark = new ymaps.Placemark(mapCenter, {
-      hintContent: hint,
-      balloonContent: balloon
-   }, {
-      iconLayout: 'default#image',
-      iconImageHref: 'img/map-location.png',
-      iconImageSize: iconImageSize,
-      iconImageOffset: iconImageOffset
-   });
+   function getIconOptions() {
+      if (window.innerWidth < 768) {
+         return {
+            iconImageSize: [53, 70],
+            iconImageOffset: [-26, -70]
+         };
+      }
 
-   myMap.behaviors.disable('scrollZoom');
+      return {
+         iconImageSize: [103, 137],
+         iconImageOffset: [-52, -137]
+      };
+   }
 
-   myMap.controls.remove('searchControl');
-   myMap.controls.remove('fullscreenControl');
-   myMap.controls.remove('rulerControl');
+   function createPlacemark() {
+      if (myPlacemark) {
+         myMap.geoObjects.remove(myPlacemark);
+      }
 
-   myMap.geoObjects.add(myPlacemark);
+      const options = getIconOptions();
 
-   window.addEventListener('resize', function () {
-      const newIconImageSize = window.innerWidth < 768 ? [80, 107] : [170, 200];
-      const newIconImageOffset = window.innerWidth < 768 ? [-42.5, -105] : [-85, -200];
-
-      myPlacemark.options.set({
-         iconImageSize: newIconImageSize,
-         iconImageOffset: newIconImageOffset,
+      myPlacemark = new ymaps.Placemark(center, {}, {
+         iconLayout: 'default#image',
+         iconImageHref: 'img/map-location.png',
+         ...options
       });
+
+      myMap.geoObjects.add(myPlacemark);
+   }
+
+   createPlacemark();
+
+   window.addEventListener('resize', () => {
+      createPlacemark();
    });
 }
 
@@ -1529,7 +1525,7 @@ function initArchiveSlider() {
             },
             breakpoints: {
                320: {
-                  slidesPerView: 1.1,
+                  slidesPerView: 1.18,
                },
                550: {
                   slidesPerView: 2.2,

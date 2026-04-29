@@ -1594,33 +1594,23 @@ Hero
 .hero__body {
   position: relative;
 }
-.hero__video {
+.hero__video, .hero__image {
   width: 100%;
-}
-.hero__video video {
-  max-width: 100%;
-  width: 100%;
+  position: relative;
   min-height: 45vh;
+  aspect-ratio: 21/9;
 }
-@media (width < 1000px) {
-  .hero__video video {
-    max-height: 100vh;
-    object-fit: cover;
-  }
-}
-.hero__image {
-  width: 100%;
-}
+.hero__video video,
+.hero__video img, .hero__image video,
 .hero__image img {
-  max-width: 100%;
+  position: absolute;
   width: 100%;
-  object-position: top;
-  min-height: 45vh;
+  height: 100%;
+  object-fit: cover;
 }
-@media (width < 1000px) {
-  .hero__image img {
-    max-height: 100vh;
-    object-fit: cover;
+@media (width < 767px) {
+  .hero__video, .hero__image {
+    aspect-ratio: 5/8;
   }
 }
 .hero__text {
@@ -1631,6 +1621,7 @@ Hero
   text-align: center;
   color: #fff;
   width: 100%;
+  z-index: 5;
 }
 @media (width < 550px) {
   .hero__text {
@@ -1679,6 +1670,13 @@ Hero
 }
 .hero__link .link-underline::after {
   background: #fff;
+}
+
+.hero.--lookbook .hero__video,
+.hero.--lookbook .hero__image,
+.hero.--tailoring .hero__video,
+.hero.--tailoring .hero__image {
+  aspect-ratio: 4/5;
 }
 
 .hero.--lookbook .hero__text {
@@ -1862,7 +1860,7 @@ Products slider
 }
 .product-card__image {
   width: 100%;
-  aspect-ratio: 306/409;
+  aspect-ratio: 4/5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1875,7 +1873,7 @@ Products slider
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 @media (width < 600px) {
@@ -2756,7 +2754,6 @@ Collections
 }
 @media (width < 767px) {
   .filter__stock .filter-radio__text {
-    font-size: 12px;
     line-height: 1;
   }
 }
@@ -2766,7 +2763,7 @@ Collections
 }
 @media (width < 767px) {
   .filter__actions .btn {
-    font-size: 13px;
+    font-size: 14px;
   }
 }
 
@@ -2992,9 +2989,15 @@ Product page
   width: 100%;
   position: relative;
 }
+.product__gallery-slide {
+  position: relative;
+  aspect-ratio: 4/5;
+}
 .product__gallery-slide img {
+  position: absolute;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 .product__slider-pagination {
   display: none;
@@ -4376,7 +4379,7 @@ Articles
     margin-top: 0;
   }
   .article__body .about__gallery .swiper-slide {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     position: relative;
   }
   .article__body .about__gallery .swiper-slide .glightbox {
@@ -4897,6 +4900,7 @@ Tailoring
 @media (width < 767px) {
   .tailoring__body {
     padding-top: 50px;
+    width: calc(100% - 50px);
   }
 }
 .tailoring__title {
@@ -4962,10 +4966,10 @@ Tailoring
 }
 @media (width < 767px) {
   .tailoring__contacts-title {
-    font-size: 13px;
+    font-size: 15px;
     line-height: 145.454545%;
     margin-bottom: 16px;
-    max-width: 318px;
+    max-width: 380px;
     margin-inline: auto;
   }
 }
@@ -5558,11 +5562,17 @@ Contacts
   max-width: 980px;
   margin-inline: auto;
 }
+.contacts__text br {
+  display: none;
+}
 @media (width < 767px) {
   .contacts__text {
     font-size: 13px;
     margin-bottom: 32px;
     padding-inline: 12px;
+  }
+  .contacts__text br {
+    display: block;
   }
 }
 @media (width < 374px) {
@@ -5573,6 +5583,8 @@ Contacts
 .contacts__gallery {
   margin-bottom: 118px;
   position: relative;
+  max-width: 1300px;
+  margin-inline: auto;
 }
 @media (width < 767px) {
   .contacts__gallery {
@@ -5620,7 +5632,10 @@ Contacts
   }
 }
 .contacts__map {
-  width: 100%;
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
   height: 635px;
 }
 .contacts__map #map {
@@ -5660,8 +5675,7 @@ Contacts
   color: var(--color-text);
 }
 @media (width < 600px) {
-  .callback .request__form,
-  .callback .request__subtitle {
+  .callback .request__form {
     width: calc(100% - 60px);
     margin-inline: auto;
   }
@@ -5769,7 +5783,7 @@ Archival collections
 }
 @media (width < 767px) {
   .archival__title {
-    font-size: 13px;
+    font-size: 15px;
     line-height: 123.076923%;
     max-width: 313px;
     margin-inline: auto;
