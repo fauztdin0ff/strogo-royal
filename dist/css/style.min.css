@@ -605,6 +605,26 @@ Other
   border-radius: 0 !important;
 }
 
+.goverlay {
+  background: #fff !important;
+}
+
+.gbtn {
+  background: transparent !important;
+}
+
+.gbtn path {
+  fill: #000 !important;
+}
+
+.gslide-media.gslide-image {
+  box-shadow: none !important;
+}
+
+.glightbox-open {
+  overflow: unset !important;
+}
+
 /*==========================================================================
 Header
 ============================================================================*/
@@ -787,7 +807,7 @@ Menu
     padding-bottom: 13px;
     border-bottom: 0.5px solid #e2dfdf;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     transition: all 0.3s var(--animation-easy-both);
   }
   .menu__body-close svg {
@@ -823,6 +843,7 @@ Menu
     position: relative;
     overflow-x: hidden;
     overflow-y: auto;
+    margin-top: 4px;
   }
 }
 @media (width < 374px) {
@@ -983,9 +1004,9 @@ Menu
     display: flex;
     align-items: center;
     gap: 10px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid #e2dfdf;
-    margin-bottom: 18px;
+    padding-bottom: 20px;
+    border-bottom: 0.5px solid #e2dfdf;
+    margin-bottom: 16px;
     font-size: 14px;
     font-weight: 600;
   }
@@ -1758,12 +1779,11 @@ Hero
 }
 @media (width < 550px) {
   .hero.--tailoring .hero__subtitle {
-    max-width: 273px;
     margin-inline: auto;
     margin-bottom: 0;
   }
   .hero.--tailoring .hero__text {
-    bottom: 119px;
+    bottom: 68px;
   }
 }
 
@@ -1864,7 +1884,7 @@ Products slider
 }
 .product-card__image {
   width: 100%;
-  aspect-ratio: 4/5;
+  aspect-ratio: 3/4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2033,7 +2053,7 @@ Main links
 .main-link__name {
   font-size: 28px;
   line-height: 114.285714%;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   color: #fff;
   max-width: 90%;
   margin-inline: auto;
@@ -2043,6 +2063,7 @@ Main links
 @media (width < 767px) {
   .main-link__name {
     font-size: 24px;
+    margin-bottom: 4px;
   }
 }
 .main-link .link-underline {
@@ -2371,6 +2392,7 @@ Sketches
   background: rgba(35, 31, 32, 0.29);
   border-radius: 50%;
   color: #fff;
+  top: calc(50% - 14px);
 }
 .gallery__prev.swiper-button-disabled, .gallery__next.swiper-button-disabled {
   opacity: 0;
@@ -2378,8 +2400,18 @@ Sketches
 .gallery__prev {
   transform: translateX(-47px);
 }
+@media (width < 1650px) {
+  .gallery__prev {
+    transform: translateX(-20px);
+  }
+}
 .gallery__next {
   transform: translateX(47px);
+}
+@media (width < 1650px) {
+  .gallery__next {
+    transform: translateX(20px);
+  }
 }
 .gallery__pagination {
   display: none;
@@ -2995,7 +3027,7 @@ Product page
 }
 .product__gallery-slide {
   position: relative;
-  aspect-ratio: 4/5;
+  aspect-ratio: 3/4;
 }
 .product__gallery-slide img {
   position: absolute;
@@ -3127,7 +3159,7 @@ Product page
 }
 .product__sizes {
   padding-bottom: 20px;
-  border-bottom: 1px solid #c9c9c9;
+  border-bottom: 0.8px solid #c9c9c9;
 }
 @media (width < 767px) {
   .product__sizes {
@@ -3292,23 +3324,20 @@ Product page
   max-height: 120px;
   overflow: hidden;
 }
-@media (width < 600px) {
-  .product__about-text-wrapper {
-    max-height: unset !important;
-  }
-}
 .product__about-read {
   font-size: 16px;
   padding-bottom: 30px;
+  color: var(--color-primary);
 }
 @media (hover: hover) {
   .product__about-read:hover {
-    color: var(--color-primary);
+    color: #000;
   }
 }
-@media (width < 600px) {
+@media (width < 767px) {
   .product__about-read {
-    display: none !important;
+    font-size: 13px;
+    padding-bottom: 25px;
   }
 }
 .product__help-title {
@@ -4125,7 +4154,6 @@ About
 @media (width < 550px) {
   .brands__row-image {
     width: 100vw;
-    margin-left: -12px;
   }
 }
 .brands__row-buttons {
@@ -4364,6 +4392,11 @@ Articles
   max-width: 856px;
   padding: 78px 0 86px;
   text-align: center;
+}
+@media (width > 767px) {
+  .article__body .about__gallery figure {
+    margin: 0;
+  }
 }
 @media (width < 767px) {
   .article__body {
@@ -4897,6 +4930,12 @@ Tailoring
   max-width: 1300px;
   margin-inline: auto;
 }
+@media (width < 767px) {
+  .tailoring .about__gallery {
+    width: 100vw;
+    margin-left: -25px;
+  }
+}
 .tailoring__body {
   padding-top: 68px;
   text-align: center;
@@ -4917,7 +4956,7 @@ Tailoring
 @media (width < 767px) {
   .tailoring__title {
     font-size: 15px;
-    line-height: 145.454545%;
+    line-height: 123.076923%;
   }
 }
 @media (width < 374px) {
@@ -4971,7 +5010,7 @@ Tailoring
 @media (width < 767px) {
   .tailoring__contacts-title {
     font-size: 15px;
-    line-height: 145.454545%;
+    line-height: 123.076923%;
     margin-bottom: 16px;
     max-width: 380px;
     margin-inline: auto;

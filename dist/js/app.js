@@ -817,6 +817,12 @@ function initFilterUI() {
 
    if (!groups.length) return;
 
+   const firstGroup = groups[0];
+   const firstContent = firstGroup.querySelector('.filter__group-content');
+
+   firstGroup.classList.add('active');
+   firstContent.style.maxHeight = firstContent.scrollHeight + 'px';
+
    groups.forEach((group) => {
       const head = group.querySelector('.filter__group-head');
       const content = group.querySelector('.filter__group-content');
@@ -1450,16 +1456,20 @@ function initMap() {
    let myPlacemark;
 
    function getIconOptions() {
-      if (window.innerWidth < 768) {
-         return {
-            iconImageSize: [53, 70],
-            iconImageOffset: [-26, -70]
-         };
-      }
+      const baseSize = [103, 137];
+      const scale = window.innerWidth < 768 ? 0.75 : 1;
+
+      const size = [
+         Math.round(baseSize[0] * scale),
+         Math.round(baseSize[1] * scale)
+      ];
 
       return {
-         iconImageSize: [103, 137],
-         iconImageOffset: [-52, -137]
+         iconImageSize: size,
+         iconImageOffset: [
+            -Math.round(size[0] / 2),
+            -size[1]
+         ]
       };
    }
 
