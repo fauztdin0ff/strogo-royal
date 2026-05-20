@@ -844,6 +844,11 @@ Menu
     overflow-x: hidden;
     overflow-y: auto;
     margin-top: 4px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .menu__list ::-webkit-scrollbar {
+    display: none;
   }
 }
 @media (width < 374px) {
@@ -1629,7 +1634,7 @@ Hero
   height: 100%;
   object-fit: cover;
 }
-@media (width < 767px) {
+@media (width < 600px) {
   .hero__video, .hero__image {
     aspect-ratio: 5/8;
   }
@@ -1693,7 +1698,7 @@ Hero
   background: #fff;
 }
 
-@media (width < 767px) {
+@media (width < 600px) {
   .hero.--lookbook .hero__video,
   .hero.--lookbook .hero__image,
   .hero.--tailoring .hero__video,
@@ -1733,12 +1738,12 @@ Hero
   align-items: center;
   justify-content: center;
 }
-@media (767px < width < 1300px) {
+@media (600px < width < 1300px) {
   .hero.--about .hero__text {
     bottom: 20px;
   }
 }
-@media (width < 650px) {
+@media (width < 600px) {
   .hero.--about .hero__subtitle {
     font-size: 27px;
     line-height: 116.666667%;
@@ -1777,10 +1782,11 @@ Hero
 .hero.--tailoring .hero__text {
   bottom: 111px;
 }
-@media (width < 550px) {
+@media (width < 600px) {
   .hero.--tailoring .hero__subtitle {
     margin-inline: auto;
     margin-bottom: 0;
+    max-width: 320px;
   }
   .hero.--tailoring .hero__text {
     bottom: 68px;
@@ -2175,7 +2181,7 @@ Lookbooks
     grid-template-columns: 1fr 1fr;
   }
 }
-@media (width < 650px) {
+@media (width < 600px) {
   .lookbooks__items {
     grid-template-columns: 1fr;
     gap: 2px;
@@ -2334,12 +2340,7 @@ Lookbook
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
 }
-@media (width < 1000px) {
-  .lookbook-photos__grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media (width < 650px) {
+@media (width < 600px) {
   .lookbook-photos__grid {
     grid-template-columns: 1fr;
     gap: 2px;
@@ -2436,12 +2437,13 @@ Images block
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
 }
-@media (width < 1000px) {
+@media (width < 600px) {
   .images-block__grid {
     grid-template-columns: 1fr 1fr;
+    gap: 2px;
   }
 }
-@media (width < 650px) {
+@media (width < 500px) {
   .images-block__grid {
     grid-template-columns: 1fr;
     gap: 2px;
@@ -2565,7 +2567,7 @@ Collections
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
-@media (width < 650px) {
+@media (width < 600px) {
   .collections__products {
     margin-top: 25px;
     grid-template-columns: 1fr 1fr;
@@ -3314,11 +3316,6 @@ Product page
     font-size: 12px;
   }
 }
-@media (width < 374px) {
-  .product__about-text {
-    font-size: 10px;
-  }
-}
 .product__about-text-wrapper {
   margin-bottom: 14px;
   max-height: 120px;
@@ -3961,6 +3958,16 @@ About
 .about__row-image img {
   width: 100%;
 }
+@media (width < 767px) {
+  .about__row-image {
+    max-width: 400px;
+  }
+}
+@media (width < 500px) {
+  .about__row-image {
+    max-width: 100%;
+  }
+}
 .about__big-title {
   margin-bottom: 75px;
   position: relative;
@@ -4151,9 +4158,15 @@ About
     order: -1;
   }
 }
+@media (width < 767px) {
+  .brands__row-image {
+    max-width: 400px;
+  }
+}
 @media (width < 550px) {
   .brands__row-image {
     width: 100vw;
+    max-width: unset;
   }
 }
 .brands__row-buttons {
@@ -4495,6 +4508,13 @@ Articles
   font-size: 12px;
   line-height: 133.333333%;
   text-align: center;
+}
+@media (width < 767px) {
+  .article__text .glightbox {
+    display: block;
+    max-width: 440px;
+    margin-inline: auto;
+  }
 }
 @media (width < 600px) {
   .article__text {

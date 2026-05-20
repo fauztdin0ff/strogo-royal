@@ -598,7 +598,7 @@ function initProductsCarousel() {
                slidesPerView: 2,
                spaceBetween: 4,
             },
-            900: {
+            600: {
                slidesPerView: 3,
                spaceBetween: 6,
             },
@@ -727,6 +727,10 @@ function initGallerySliders() {
             },
             550: {
                slidesPerView: 1.6,
+               spaceBetween: 7,
+            },
+            600: {
+               slidesPerView: 2.6,
                spaceBetween: 7,
             },
             900: {
@@ -909,6 +913,16 @@ function initProductGalleryMobile() {
             el: '.product__slider-pagination',
             type: 'progressbar',
             clickable: true,
+         },
+         breakpoints: {
+            320: {
+               slidesPerView: 1,
+               spaceBetween: 0,
+            },
+            600: {
+               slidesPerView: 2,
+               spaceBetween: 2,
+            }
          },
          on: {
             progress(swiper, progress) {
@@ -1166,6 +1180,11 @@ function initAboutSliders() {
          },
 
          breakpoints: {
+            600: {
+               slidesPerView: isArticleGallery ? 2 : 2,
+               spaceBetween: 7,
+            },
+
             900: {
                slidesPerView: isArticleGallery ? 2 : 3,
                spaceBetween: 7,
@@ -1337,6 +1356,14 @@ function initGiftSlider() {
             clickable: true,
          },
          speed: 600,
+         breakpoints: {
+            320: {
+               slidesPerView: 1.18,
+            },
+            600: {
+               slidesPerView: 1.6,
+            }
+         },
          on: {
             progress(swiper, progress) {
                const line = swiper.pagination.el;
@@ -1398,7 +1425,7 @@ function contactsSlider() {
          320: {
             slidesPerView: 1.18,
          },
-         768: {
+         600: {
             slidesPerView: 3,
          },
          1200: {
