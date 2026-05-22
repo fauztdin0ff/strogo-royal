@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,251 +25,254 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.css">
-   <link rel="stylesheet" href="css/style.min.css?v=2.0.2">
+   <link rel="stylesheet" href="css/style-2.min.css">
    <title>Главная</title>
 </head>
 
 <body>
    <div class="wrapper">
       <header class="header">
-   <div class="header__wrapper">
-      <div class="header__body container">
-         <div class="header__buttons">
-            <div class="menu__icon"><span></span></div>
-         </div>
-         <a href="index.html" class="header__logo">
-            <img src="img/logo.png" width="185" height="82" alt="logo">
-         </a>
+         <div class="header__wrapper">
+            <div class="header__body container">
+               <div class="header__buttons">
+                  <div class="menu__icon"><span></span></div>
+               </div>
+               <a href="index.html" class="header__logo">
+                  <img src="img/logo.png" width="185" height="82" alt="logo">
+               </a>
 
-         <div class="header__menu menu">
-            <nav class="menu__body">
-               <button type="button" class="menu__body-close">
-                  <svg>
-                     <use xlink:href="img/icons/icons.svg#icon-close"></use>
-                  </svg>
-                  Закрыть
-               </button>
-               <ul class="menu__list">
-                  <li class="menu__item">
-                     <button type="button" class="menu__label">Коллекции
+               <div class="header__menu menu">
+                  <nav class="menu__body">
+                     <button type="button" class="menu__body-close">
                         <svg>
-                           <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                           <use xlink:href="img/icons/icons.svg#icon-close"></use>
                         </svg>
+                        Закрыть
                      </button>
-                     <div class="submenu">
-                        <div class="submenu__back">
-                           <svg>
-                              <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
-                           </svg>
-                           Коллекции
-                        </div>
-                        <ul class="submenu__list">
-                           <li class="submenu__item">
-                              <button type="button" class="submenu__label">Вечерняя коллекция
+                     <ul class="menu__list">
+                        <li class="menu__item">
+                           <button type="button" class="menu__label">Коллекции
+                              <svg>
+                                 <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                              </svg>
+                           </button>
+                           <div class="submenu">
+                              <div class="submenu__back">
                                  <svg>
-                                    <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                                    <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
                                  </svg>
-                              </button>
-                              <ul class="submenu__sublist">
-                                 <li class="submenu__subitem">
-                                    <a href="collection.html" class="submenu__sublink">Artisan</a>
+                                 Коллекции
+                              </div>
+                              <ul class="submenu__list">
+                                 <li class="submenu__item">
+                                    <button type="button" class="submenu__label">Вечерняя коллекция
+                                       <svg>
+                                          <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                                       </svg>
+                                    </button>
+                                    <ul class="submenu__sublist">
+                                       <li class="submenu__subitem">
+                                          <a href="collection.html" class="submenu__sublink">Artisan</a>
+                                       </li>
+                                       <li class="submenu__preview">
+                                          <a href="collection.html" class="submenu__preview-link">
+                                             <img src="img/categories/thumb-1.png" width="270" height="230"
+                                                alt="category image">
+                                             <span class="submenu__preview-text">Коллекция Artisan</span>
+                                          </a>
+                                       </li>
+                                    </ul>
+                                 </li>
+                                 <li class="submenu__item">
+                                    <button type="button" class="submenu__label">Каталог
+                                       <svg>
+                                          <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                                       </svg>
+                                    </button>
+                                    <ul class="submenu__sublist">
+                                       <li class="submenu__subitem">
+                                          <a href="collections.html" class="submenu__sublink">Смотреть все</a>
+                                       </li>
+                                       <li class="submenu__subitem">
+                                          <a href="collections.html" class="submenu__sublink">Платья</a>
+                                       </li>
+                                       <li class="submenu__subitem">
+                                          <a href="collections.html" class="submenu__sublink">Юбки</a>
+                                       </li>
+                                       <li class="submenu__subitem">
+                                          <a href="collections.html" class="submenu__sublink">Жакеты</a>
+                                       </li>
+                                       <li class="submenu__subitem">
+                                          <a href="collections.html" class="submenu__sublink">Пальто</a>
+                                       </li>
+                                       <li class="submenu__subitem">
+                                          <a href="collections.html" class="submenu__sublink">Костюмы</a>
+                                       </li>
+                                    </ul>
+                                 </li>
+                              </ul>
+                           </div>
+                        </li>
+                        <li class="menu__item">
+                           <button type="button" class="menu__label">Аксессуары
+                              <svg>
+                                 <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                              </svg>
+                           </button>
+                           <div class="submenu">
+                              <div class="submenu__back">
+                                 <svg>
+                                    <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
+                                 </svg>
+                                 Аксессуары
+                              </div>
+
+                              <ul class="submenu__list">
+                                 <li class="submenu__item">
+                                    <a href="collections.html" class="submenu__sublink">Сумки</a>
+                                 </li>
+                                 <li class="submenu__item">
+                                    <a href="collections.html" class="submenu__sublink">Ювелирные изделия</a>
+                                 </li>
+                                 <li class="submenu__item">
+                                    <a href="collections.html" class="submenu__sublink">Экзотическая кожа</a>
                                  </li>
                                  <li class="submenu__preview">
-                                    <a href="collection.html" class="submenu__preview-link">
-                                       <img src="img/categories/thumb-1.png" width="270" height="230"
+                                    <a href="collections.html" class="submenu__preview-link">
+                                       <img src="img/categories/thumb-3.png" width="270" height="230"
                                           alt="category image">
-                                       <span class="submenu__preview-text">Коллекция Artisan</span>
+                                       <span class="submenu__preview-text">Аксессуары из экзотческой кожи</span>
                                     </a>
                                  </li>
                               </ul>
-                           </li>
-                           <li class="submenu__item">
-                              <button type="button" class="submenu__label">Каталог
+                           </div>
+                        </li>
+                        <li class="menu__item">
+                           <button type="button" class="menu__label">LookBook
+                              <svg>
+                                 <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                              </svg>
+                           </button>
+                           <div class="submenu">
+                              <div class="submenu__back">
                                  <svg>
-                                    <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                                    <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
                                  </svg>
-                              </button>
-                              <ul class="submenu__sublist">
-                                 <li class="submenu__subitem">
-                                    <a href="collections.html" class="submenu__sublink">Смотреть все</a>
+                                 Lookbook
+                              </div>
+
+                              <ul class="submenu__list">
+                                 <li class="submenu__item">
+                                    <a href="lookbooks.html" class="submenu__sublink">Смотреть все</a>
                                  </li>
-                                 <li class="submenu__subitem">
-                                    <a href="collections.html" class="submenu__sublink">Платья</a>
+                                 <li class="submenu__item">
+                                    <a href="lookbook.html" class="submenu__sublink">Artisan</a>
                                  </li>
-                                 <li class="submenu__subitem">
-                                    <a href="collections.html" class="submenu__sublink">Юбки</a>
+                                 <li class="submenu__item">
+                                    <a href="archival-collections.html" class="submenu__sublink">Архивная коллекция</a>
                                  </li>
-                                 <li class="submenu__subitem">
-                                    <a href="collections.html" class="submenu__sublink">Жакеты</a>
-                                 </li>
-                                 <li class="submenu__subitem">
-                                    <a href="collections.html" class="submenu__sublink">Пальто</a>
-                                 </li>
-                                 <li class="submenu__subitem">
-                                    <a href="collections.html" class="submenu__sublink">Костюмы</a>
+                                 <li class="submenu__preview">
+                                    <a href="lookbook.html" class="submenu__preview-link">
+                                       <img src="img/categories/thumb-2.png" width="270" height="230"
+                                          alt="category image">
+                                       <span class="submenu__preview-text">Lookbook Artisan 2026</span>
+                                    </a>
                                  </li>
                               </ul>
-                           </li>
-                        </ul>
-                     </div>
-                  </li>
-                  <li class="menu__item">
-                     <button type="button" class="menu__label">Аксессуары
-                        <svg>
-                           <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
-                        </svg>
-                     </button>
-                     <div class="submenu">
-                        <div class="submenu__back">
+                           </div>
+                        </li>
+                        <li class="menu__item">
+                           <a href="tailoring.html" class="menu__link">Индивидуальный пошив</a>
+                        </li>
+                        <li class="menu__item">
+                           <a href="gift-sertificate.html" class="menu__link">Подарочный сертификат</a>
+                        </li>
+                        <li class="menu__item">
+                           <button type="button" class="menu__label">О бренде
+                              <svg>
+                                 <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
+                              </svg>
+                           </button>
+                           <div class="submenu">
+                              <div class="submenu__back">
+                                 <svg>
+                                    <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
+                                 </svg>
+                                 О бренде
+                              </div>
+
+                              <ul class="submenu__list">
+                                 <li class="submenu__item">
+                                    <a href="about.html" class="submenu__sublink">Биография дизайнера</a>
+                                 </li>
+                                 <li class="submenu__item">
+                                    <a href="smi.html" class="submenu__sublink">Сми о нас</a>
+                                 </li>
+                                 <li class="submenu__item">
+                                    <a href="blog.html" class="submenu__sublink">Статьи</a>
+                                 </li>
+                                 <li class="submenu__item">
+                                    <a href="models.html" class="submenu__sublink">Музы бренда</a>
+                                 </li>
+                                 <li class="submenu__preview">
+                                    <a href="about.html" class="submenu__preview-link">
+                                       <img src="img/categories/thumb-4.png" width="270" height="230"
+                                          alt="category image">
+                                       <span class="submenu__preview-text">Биография дизайнера</span>
+                                    </a>
+                                 </li>
+                              </ul>
+                           </div>
+                        </li>
+                        <li class="menu__item">
+                           <a href="contacts.html" class="menu__link">Контакты</a>
+                        </li>
+
+                     </ul>
+                     <div class="socials">
+                        <a href="tel:+7" class="socials__link" aria-label="Позвонить">
                            <svg>
-                              <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
+                              <use xlink:href="img/icons/icons.svg#icon-phone"></use>
                            </svg>
-                           Аксессуары
-                        </div>
-
-                        <ul class="submenu__list">
-                           <li class="submenu__item">
-                              <a href="collections.html" class="submenu__sublink">Сумки</a>
-                           </li>
-                           <li class="submenu__item">
-                              <a href="collections.html" class="submenu__sublink">Ювелирные изделия</a>
-                           </li>
-                           <li class="submenu__item">
-                              <a href="collections.html" class="submenu__sublink">Экзотическая кожа</a>
-                           </li>
-                           <li class="submenu__preview">
-                              <a href="collections.html" class="submenu__preview-link">
-                                 <img src="img/categories/thumb-3.png" width="270" height="230" alt="category image">
-                                 <span class="submenu__preview-text">Аксессуары из экзотческой кожи</span>
-                              </a>
-                           </li>
-                        </ul>
-                     </div>
-                  </li>
-                  <li class="menu__item">
-                     <button type="button" class="menu__label">LookBook
-                        <svg>
-                           <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
-                        </svg>
-                     </button>
-                     <div class="submenu">
-                        <div class="submenu__back">
+                        </a>
+                        <a href="" class="socials__link" aria-label="Telegram">
                            <svg>
-                              <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
+                              <use xlink:href="img/icons/icons.svg#icon-telegram"></use>
                            </svg>
-                           Lookbook
-                        </div>
-
-                        <ul class="submenu__list">
-                           <li class="submenu__item">
-                              <a href="lookbooks.html" class="submenu__sublink">Смотреть все</a>
-                           </li>
-                           <li class="submenu__item">
-                              <a href="lookbook.html" class="submenu__sublink">Artisan</a>
-                           </li>
-                           <li class="submenu__item">
-                              <a href="archival-collections.html" class="submenu__sublink">Архивная коллекция</a>
-                           </li>
-                           <li class="submenu__preview">
-                              <a href="lookbook.html" class="submenu__preview-link">
-                                 <img src="img/categories/thumb-2.png" width="270" height="230" alt="category image">
-                                 <span class="submenu__preview-text">Lookbook Artisan 2026</span>
-                              </a>
-                           </li>
-                        </ul>
-                     </div>
-                  </li>
-                  <li class="menu__item">
-                     <a href="tailoring.html" class="menu__link">Индивидуальный пошив</a>
-                  </li>
-                  <li class="menu__item">
-                     <a href="gift-sertificate.html" class="menu__link">Подарочный сертификат</a>
-                  </li>
-                  <li class="menu__item">
-                     <button type="button" class="menu__label">О бренде
-                        <svg>
-                           <use xlink:href="img/icons/icons.svg#icon-chevron-right"></use>
-                        </svg>
-                     </button>
-                     <div class="submenu">
-                        <div class="submenu__back">
+                        </a>
+                        <a href="" class="socials__link" aria-label="Whatsapp">
                            <svg>
-                              <use xlink:href="img/icons/icons.svg#icon-chevron-left"></use>
+                              <use xlink:href="img/icons/icons.svg#icon-whatsapp"></use>
                            </svg>
-                           О бренде
-                        </div>
-
-                        <ul class="submenu__list">
-                           <li class="submenu__item">
-                              <a href="about.html" class="submenu__sublink">Биография дизайнера</a>
-                           </li>
-                           <li class="submenu__item">
-                              <a href="smi.html" class="submenu__sublink">Сми о нас</a>
-                           </li>
-                           <li class="submenu__item">
-                              <a href="blog.html" class="submenu__sublink">Статьи</a>
-                           </li>
-                           <li class="submenu__item">
-                              <a href="models.html" class="submenu__sublink">Музы бренда</a>
-                           </li>
-                           <li class="submenu__preview">
-                              <a href="about.html" class="submenu__preview-link">
-                                 <img src="img/categories/thumb-4.png" width="270" height="230" alt="category image">
-                                 <span class="submenu__preview-text">Биография дизайнера</span>
-                              </a>
-                           </li>
-                        </ul>
+                        </a>
                      </div>
-                  </li>
-                  <li class="menu__item">
-                     <a href="contacts.html" class="menu__link">Контакты</a>
-                  </li>
-
-               </ul>
-               <div class="socials">
-                  <a href="tel:+7" class="socials__link" aria-label="Позвонить">
-                     <svg>
-                        <use xlink:href="img/icons/icons.svg#icon-phone"></use>
-                     </svg>
-                  </a>
-                  <a href="" class="socials__link" aria-label="Telegram">
-                     <svg>
-                        <use xlink:href="img/icons/icons.svg#icon-telegram"></use>
-                     </svg>
-                  </a>
-                  <a href="" class="socials__link" aria-label="Whatsapp">
-                     <svg>
-                        <use xlink:href="img/icons/icons.svg#icon-whatsapp"></use>
-                     </svg>
-                  </a>
+                  </nav>
                </div>
-            </nav>
-         </div>
 
-         <div class="header__actions">
-            <div class="lang-mod">
-               <button type="button" class="lang-mod__btn">
-                  <svg>
-                     <use xlink:href="img/icons/icons.svg#icon-globe"></use>
-                  </svg>
-                  RU
-                  <span class="lang-mod__arrow">
-                     <svg>
-                        <use xlink:href="img/icons/icons.svg#icon-arrow-down"></use>
-                     </svg>
-                  </span>
-               </button>
-               <ul class="lang-mod__menu">
-                  <li class="lang-mod__menu-item">
-                     <a href="" class="lang-mod__link">EN</a>
-                  </li>
-               </ul>
+               <div class="header__actions">
+                  <div class="lang-mod">
+                     <button type="button" class="lang-mod__btn">
+                        <svg>
+                           <use xlink:href="img/icons/icons.svg#icon-globe"></use>
+                        </svg>
+                        RU
+                        <span class="lang-mod__arrow">
+                           <svg>
+                              <use xlink:href="img/icons/icons.svg#icon-arrow-down"></use>
+                           </svg>
+                        </span>
+                     </button>
+                     <ul class="lang-mod__menu">
+                        <li class="lang-mod__menu-item">
+                           <a href="" class="lang-mod__link">EN</a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
             </div>
+            <div class="header-bg"></div>
          </div>
-      </div>
-      <div class="header-bg"></div>
-   </div>
-</header>
+      </header>
       <main>
          <section class="error-page">
             <div class="error-page__body container">
@@ -285,84 +289,87 @@
          </section>
       </main>
       <footer class="footer">
-   <div class="footer__body container">
-      <div class="footer__main">
-         <a href="index.html" class="footer__logo">
-            <img src="img/logo.png" width="244" height="159" alt="logo">
-         </a>
-         <nav class="footer__menu">
-            <div class="footer__menu-col">
-               <div class="footer__menu-label">Клиентам</div>
-               <ul class="footer__menu-list">
-                  <li class="footer__menu-list-item">
-                     <a href="tailoring.html" class="footer__menu-link">Индивидуальный пошив</a>
-                  </li>
-                  <li class="footer__menu-list-item only-desktop">
-                     <a href="gift-sertificate.html" class="footer__menu-link">Подарочный сертификат</a>
-                  </li>
-                  <li class="footer__menu-list-item has-submenu">
-                     <button type="button" class="footer__menu-button">Правовая информация
-                        <svg>
-                           <use xlink:href="img/icons/icons.svg#icon-chevron-down"></use>
-                        </svg>
-                     </button>
-                     <div class="footer__submenu">
-                        <ul class="footer__submenu-list">
-                           <li><a href="files/privacy-policy.pdf">Политика конфиденциальности</a></li>
-                           <li><a href="files/data-processing-policy.pdf">Политика обработки персональных данных</a>
-                           </li>
-                           <li><a href="data-processing-consent.html">Согласие на обработку персональных данных</a></li>
-                           <li><a href="cookies-consent.html">Согласие на обработку файлов cookies</a></li>
-                        </ul>
-                     </div>
-                  </li>
-                  <li class="footer__menu-list-item">
-                     <a href="" class="footer__menu-link">FAQ</a>
-                  </li>
-               </ul>
-            </div>
-            <div class="footer__menu-col">
-               <div class="footer__menu-label">О компании</div>
-               <ul class="footer__menu-list">
-                  <li class="footer__menu-list-item">
-                     <a href="" class="footer__menu-link">Контакты</a>
-                  </li>
-                  <li class="footer__menu-list-item">
-                     <a href="" class="footer__menu-link">История бренда</a>
-                  </li>
-                  <li class="footer__menu-list-item only-desktop">
-                     <a href="" class="footer__menu-link">Блог</a>
-                  </li>
-                  <li class="footer__menu-list-item only-desktop">
-                     <a href="" class="footer__menu-link">Telegram канал</a>
-                  </li>
-               </ul>
-            </div>
-         </nav>
-         <div class="footer__subscribe">
-            <div class="footer__subscribe-label">Присоединяйтесь к миру STROGÓ ROYALE</div>
-            <div class="footer__subscribe-content">
-               <form class="footer__subscribe-form">
-                  <div class="footer__subscribe-form-area">
-                     <input type="email" autocomplete="email" placeholder="E-mail" required>
+         <div class="footer__body container">
+            <div class="footer__main">
+               <a href="index.html" class="footer__logo">
+                  <img src="img/logo.png" width="244" height="159" alt="logo">
+               </a>
+               <nav class="footer__menu">
+                  <div class="footer__menu-col">
+                     <div class="footer__menu-label">Клиентам</div>
+                     <ul class="footer__menu-list">
+                        <li class="footer__menu-list-item">
+                           <a href="tailoring.html" class="footer__menu-link">Индивидуальный пошив</a>
+                        </li>
+                        <li class="footer__menu-list-item only-desktop">
+                           <a href="gift-sertificate.html" class="footer__menu-link">Подарочный сертификат</a>
+                        </li>
+                        <li class="footer__menu-list-item has-submenu">
+                           <button type="button" class="footer__menu-button">Правовая информация
+                              <svg>
+                                 <use xlink:href="img/icons/icons.svg#icon-chevron-down"></use>
+                              </svg>
+                           </button>
+                           <div class="footer__submenu">
+                              <ul class="footer__submenu-list">
+                                 <li><a href="files/privacy-policy.pdf">Политика конфиденциальности</a></li>
+                                 <li><a href="files/data-processing-policy.pdf">Политика обработки персональных
+                                       данных</a>
+                                 </li>
+                                 <li><a href="data-processing-consent.html">Согласие на обработку персональных
+                                       данных</a></li>
+                                 <li><a href="cookies-consent.html">Согласие на обработку файлов cookies</a></li>
+                              </ul>
+                           </div>
+                        </li>
+                        <li class="footer__menu-list-item">
+                           <a href="" class="footer__menu-link">FAQ</a>
+                        </li>
+                     </ul>
                   </div>
-                  <div class="footer__subscribe-form-area">
-                     <label class="agree-checkbox">
-                        <input type="checkbox" required="">
-                        <span class="agree-checkbox__box"></span>
-                        <span class="agree-checkbox__text">Я согласен на получение новостной/рекламной рассылки</span>
-                     </label>
+                  <div class="footer__menu-col">
+                     <div class="footer__menu-label">О компании</div>
+                     <ul class="footer__menu-list">
+                        <li class="footer__menu-list-item">
+                           <a href="" class="footer__menu-link">Контакты</a>
+                        </li>
+                        <li class="footer__menu-list-item">
+                           <a href="" class="footer__menu-link">История бренда</a>
+                        </li>
+                        <li class="footer__menu-list-item only-desktop">
+                           <a href="" class="footer__menu-link">Блог</a>
+                        </li>
+                        <li class="footer__menu-list-item only-desktop">
+                           <a href="" class="footer__menu-link">Telegram канал</a>
+                        </li>
+                     </ul>
                   </div>
-                  <button type="submit" class="btn footer__subscribe-form-send">Подписаться</button>
-               </form>
+               </nav>
+               <div class="footer__subscribe">
+                  <div class="footer__subscribe-label">Присоединяйтесь к миру STROGÓ ROYALE</div>
+                  <div class="footer__subscribe-content">
+                     <form class="footer__subscribe-form">
+                        <div class="footer__subscribe-form-area">
+                           <input type="email" autocomplete="email" placeholder="E-mail" required>
+                        </div>
+                        <div class="footer__subscribe-form-area">
+                           <label class="agree-checkbox">
+                              <input type="checkbox" required="">
+                              <span class="agree-checkbox__box"></span>
+                              <span class="agree-checkbox__text">Я согласен на получение новостной/рекламной
+                                 рассылки</span>
+                           </label>
+                        </div>
+                        <button type="submit" class="btn footer__subscribe-form-send">Подписаться</button>
+                     </form>
+                  </div>
+               </div>
             </div>
+            <div class="footer__copyright">STROGÓ ROYALE by Anna-Roza Bistroff 2026</div>
          </div>
-      </div>
-      <div class="footer__copyright">STROGÓ ROYALE by Anna-Roza Bistroff 2026</div>
+      </footer>
    </div>
-</footer>
-   </div>
-   
+
    <div class="cookie" id="cookieBanner">
       <div class="cookie__content">
          <p class="cookie__text">
@@ -378,7 +385,7 @@
    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.js"></script>
-   <script src="js/app.js"></script>
+   <script src="js/app-2.js"></script>
 </body>
 
 </html>
